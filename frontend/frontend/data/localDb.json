@@ -1,0 +1,16 @@
+{
+    "cart": {
+        "CJ001": {
+            "Name": "Asics Hyper Md US 3",
+            "ProdCode": "CJ001",
+            "Category": "Athletics",
+            "Price": 9999
+        }, 
+        "CJ002": {
+            "Name": "Random Product",
+            "ProdCode": "CJ002",
+            "Category": "Rugby",
+            "Price": 9999
+        }
+    }
+}
