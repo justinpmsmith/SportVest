@@ -30,7 +30,9 @@
 </template>
   
   <script>
-import { useCartStore } from "pinia";
+import { useCartStore } from '~/store/cart';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 export default {
   props: {
     product: Object,
@@ -41,8 +43,10 @@ export default {
       message1:
         "To buy this item, please reach out to us on WhatsApp or via email",
       cell: "084 507 3080",
+      cartStore: useCartStore(),
     };
   },
+
   methods: {
     copyToClipboard(text) {
       const el = document.createElement("textarea");
@@ -53,9 +57,17 @@ export default {
       document.body.removeChild(el);
     },
     addToCart() {
-      const cartStore = useCartStore();
-      cartStore.addToCart(this.product);
-      console.log(cartStore.cart());
+      this.cartStore.addToCart(this.product);
+      console.log('cart');
+      console.log(this.cartStore.cart);
+
+      toast("Product added to cart", {
+        autoClose: 1000,
+      });
+      this.closePopup();
+    },
+    closePopup() {
+      this.$emit('close-popup'); // Emit an event called 'close-popup'
     },
   },
 };

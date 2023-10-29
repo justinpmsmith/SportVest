@@ -1,13 +1,14 @@
 <template>
   <div class="site-wrapper bg-main">
-    <nav class="flex flex-col md:flex-row items-center justify-center"> <!-- Center the logo and buttons -->
+    <nav class="flex flex-col md:flex-row items-center justify-center">
+      <!-- Center the logo and buttons -->
       <div class="logo-container">
-        <NuxtLink to="/">
+        <div @click="goHome">
           <img src="../assets/static/logo.png" alt="Home" class="logo-image" />
-        </NuxtLink>
+        </div>
       </div>
 
-      <div class="button-container mt-4">
+      <div class="button-container mt-4" v-if="!cartStore.inCartFlag">
         <NuxtLink
           to="/sellSomething"
           class="py-3 px-6 bg-gray-800 text-white rounded-md whitespace-nowrap font-bold nav-links"
@@ -16,11 +17,35 @@
         </NuxtLink>
 
         <NuxtLink
-          to="/sellSomething"
+          to="/theCart"
+          class="py-3 px-6 bg-gray-800 text-white rounded-md whitespace-nowrap font-bold nav-links"
+          style="display: flex; align-items: center"
+        >
+          Cart
+          <span style="margin-left: 0.5rem">
+            <Icon name="material-symbols:shopping-cart-sharp" color="white" />
+          </span>
+        </NuxtLink>
+      </div>
+
+      <div class="button-container mt-4" v-if="cartStore.inCartFlag">
+        <div
+          @click="clearCart"
           class="py-3 px-6 bg-gray-800 text-white rounded-md whitespace-nowrap font-bold nav-links"
         >
-          Go To Cart
-        </NuxtLink>
+          Clear Cart
+      </div>
+
+        <div
+          @click="checkout"
+          class="py-3 px-6 bg-gray-800 text-white rounded-md whitespace-nowrap font-bold nav-links"
+          style="display: flex; align-items: center"
+        >
+          Checkout
+          <span style="margin-left: 0.5rem">
+            <Icon name="material-symbols:shopping-cart-sharp" color="white" />
+          </span>
+        </div>
       </div>
     </nav>
     <div class="content-wrapper flex-grow">
@@ -32,6 +57,32 @@
     </footer>
   </div>
 </template>
+<script>
+import { useCartStore } from "~/store/cart";
+export default {
+  data() {
+    return {
+      cartStore: useCartStore(),
+    };
+  },
+  methods:{
+    clearCart(){
+      this.cartStore.clearCart();
+    },
+    checkout(){
+      console.log("checkout");
+    },
+    goHome(){
+      this.cartStore.setInCartFlag(false);
+      this.$router.push('/');
+    }
+
+  }
+
+};
+</script>
+
+
 
 <style scoped>
 .site-wrapper {
