@@ -3,32 +3,35 @@
 import { defineStore } from 'pinia';
 
 export const useCartStore = defineStore('cart', {
-  state: () => ({
+  state: () => {
+    return{
     cartItems: {},
-  }),
+    inCart: false,
+  }
+  },
+  persist: {
+    storage: persistedState.localStorage,
+  },
   getters: {
     cart: (state) => state.cartItems,
+    inCartFlag: (state) => state.inCart,
+    
   },
   actions: {
     addToCart(product) {
-      const { prodCode } = product;
-      if (!this.cartItems[prodCode]) {
-        this.cartItems[prodCode] = { ...product, quantity: 1 };
-      } else {
-        this.cartItems[prodCode].quantity += 1;
-      }
+      
+      this.cartItems[product.prodCode] = product;
     },
     removeFromCart(prodCode) {
       if (this.cartItems[prodCode]) {
-        if (this.cartItems[prodCode].quantity > 1) {
-          this.cartItems[prodCode].quantity -= 1;
-        } else {
-          delete this.cartItems[prodCode];
-        }
+        delete this.cartItems[prodCode];
       }
     },
     clearCart() {
         this.cartItems = {};
       },
+      setInCartFlag(value){
+        this.inCart = value;
+      }
   },
 });

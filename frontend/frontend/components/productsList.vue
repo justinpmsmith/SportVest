@@ -11,7 +11,7 @@
     <PopUpCard
       v-if="selectedProduct"
       :product="selectedProduct"
-      @close="closePopUp"
+      @close-popup="closePopUp"
     ></PopUpCard>
   </div>
 </template>
