@@ -1,10 +1,10 @@
 <template>
-    <div class="popup-card">
-      <div class="popup-wrapper">
-        <v-card class="popup-content">
-          <v-img :src="product.image" class="popup-image"></v-img>
-          <div class="popup-message">
-            <!-- <ul class="popup-list">
+  <div class="popup-card">
+    <div class="popup-wrapper">
+      <v-card class="popup-content">
+        <v-img :src="product.image" class="popup-image"></v-img>
+        <div class="popup-message">
+          <!-- <ul class="popup-list">
               <li class="popup-item">
                 <p class="popup-text">{{ message1 }}</p>
               </li>
@@ -21,105 +21,111 @@
                 <v-btn class="copy-button" @click="copyToClipboard(email)">Copy</v-btn>
               </li>
             </ul> -->
-          </div>
-          <div class="popup-button" @click="closePopup">Close</div>
-          <div class="popup-button" @click="addProductToCart">Add to Cart</div>
-
-        </v-card>
-      </div>
+        </div>
+        <div class="popup-button" @click="closePopup">Close</div>
+        <div class="popup-button" @click="addToCart">Add to Cart</div>
+      </v-card>
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
-  export default {
-    props: {
-      product: Object,
+import { useCartStore } from "pinia";
+export default {
+  props: {
+    product: Object,
+  },
+  data() {
+    return {
+      email: "Joso@me.com",
+      message1:
+        "To buy this item, please reach out to us on WhatsApp or via email",
+      cell: "084 507 3080",
+    };
+  },
+  methods: {
+    copyToClipboard(text) {
+      const el = document.createElement("textarea");
+      el.value = text;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
     },
-    data() {
-      return {
-        email: 'Joso@me.com',
-        message1: 'To buy this item, please reach out to us on WhatsApp or via email',
-        cell: "084 507 3080"
-      }
+    addToCart() {
+      const cartStore = useCartStore();
+      cartStore.addToCart(this.product);
+      console.log(cartStore.cart());
     },
-    methods: {
-      copyToClipboard(text) {
-        const el = document.createElement('textarea');
-        el.value = text;
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el); 
-      }
-    }
-  };
-  </script>
+  },
+};
+</script>
   
   <style scoped>
-  .popup-card {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  }
-  
-  .popup-wrapper {
-    width: 25rem;
-    padding: 1rem;
-    position: relative;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .popup-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background-color: rgb(10, 66, 77);
-    padding: 1rem;
-  }
-  
-  .popup-image {
-    width: 100%;
-    height: auto;
-    background-color: #333333;
-  }
-  
-  .popup-message {
-    margin-top: 1rem;
-  }
-  
-  .popup-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .popup-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 0;
-    elevation: 1;
-    background-color: white;
-  }
-  
-  .popup-text {
-    margin: 0;
-  }
-  
-  .clickable {
-    cursor: pointer;
-    font-weight: bold;
-    text-decoration: bold;
-  }
-  
-  .copy-button {
+.popup-card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
+
+.popup-wrapper {
+  width: 25rem;
+  padding: 1rem;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: rgb(10, 66, 77);
+  padding: 1rem;
+}
+
+.popup-image {
+  width: 100%;
+  height: auto;
+  background-color: #333333;
+}
+
+.popup-message {
+  margin-top: 1rem;
+}
+
+.popup-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.popup-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  elevation: 1;
+  background-color: white;
+}
+
+.popup-text {
+  margin: 0;
+}
+
+.clickable {
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: bold;
+}
+
+.copy-button {
   margin-left: 1rem;
   background-color: #047481;
   color: white;
@@ -140,5 +146,5 @@
   box-sizing: border-box;
   border: 2px solid white;
 }
-  </style>
+</style>
   
