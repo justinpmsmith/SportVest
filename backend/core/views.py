@@ -41,7 +41,7 @@ class SellSomethingForm(APIView):
         subject = 'New Product'
         message = f"Description: {description}\nPrice: {price}\nCell: {cell}"
         from_email = settings.EMAIL_HOST_USER
-        to_email = ['justinpmsmith@outlook.com']
+        to_email = ['justinpmsmith10@gmail.com']
 
         email = EmailMessage(subject, message, from_email, to_email)
 

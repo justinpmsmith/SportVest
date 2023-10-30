@@ -49,6 +49,7 @@
       </div>
     </nav>
     <div class="content-wrapper flex-grow">
+      <br>
       <slot></slot>
     </div>
 
@@ -96,12 +97,19 @@ export default {
 .logo-container {
   display: flex;
   justify-content: center; /* Center the logo horizontally */
+  margin: 2rem;
 }
 
 .logo-image {
   width: 40%;
   height: auto;
-  margin-left: 32%;
+}
+
+/* Styles for screens with a maximum width of 600px (adjust as needed) */
+@media (max-width: 780px) {
+  .logo-image {
+    margin-left: 32%;
+  }
 }
 
 .button-container {
