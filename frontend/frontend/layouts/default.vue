@@ -8,7 +8,7 @@
         </div>
       </div>
 
-      <div class="button-container mt-4" v-if="!cartStore.inCartFlag">
+      <div class="button-container mt-4" v-if="cartStore.inHomeFlag" style="margin-bottom: 1rem">
         <NuxtLink
           to="/sellSomething"
           class="py-3 px-6 bg-gray-800 text-white rounded-md whitespace-nowrap font-bold nav-links"
@@ -26,9 +26,10 @@
             <Icon name="material-symbols:shopping-cart-sharp" color="white" />
           </span>
         </NuxtLink>
+
       </div>
 
-      <div class="button-container mt-4" v-if="cartStore.inCartFlag">
+      <div class="button-container mt-4" v-else-if="cartStore.inCartFlag">
         <div
           @click="clearCart"
           class="py-3 px-6 bg-gray-800 text-white rounded-md whitespace-nowrap font-bold nav-links"
@@ -47,9 +48,11 @@
           </span>
         </div>
       </div>
+      <div class="button-container mt-4" v-else-if="cartStore.inSellSomethingFlag">
+      </div>
     </nav>
     <div class="content-wrapper flex-grow">
-      <br>
+     
       <slot></slot>
     </div>
 
@@ -75,6 +78,8 @@ export default {
     },
     goHome(){
       this.cartStore.setInCartFlag(false);
+      this.cartStore.setInHomeFlag(true);
+
       this.$router.push('/');
     }
 

@@ -7,6 +7,8 @@ export const useCartStore = defineStore('cart', {
     return{
     cartItems: {},
     inCart: false,
+    inHome:true,
+    inSellSomething: false, 
   }
   },
   persist: {
@@ -15,6 +17,8 @@ export const useCartStore = defineStore('cart', {
   getters: {
     cart: (state) => state.cartItems,
     inCartFlag: (state) => state.inCart,
+    inHomeFlag: (state) => state.inHome,
+    inSellSomethingFlag: (state) => state.inSellSomething,
     
   },
   actions: {
@@ -32,6 +36,12 @@ export const useCartStore = defineStore('cart', {
       },
       setInCartFlag(value){
         this.inCart = value;
+      },
+      setInHomeFlag(value){
+        this.inHome = value;
+      },
+      setInSellSomethingFlag(value){
+        this.inSellSomething = value;
       }
   },
 });

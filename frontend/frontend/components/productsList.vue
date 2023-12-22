@@ -3,7 +3,12 @@
     <h2 class="category-heading">{{ category }}</h2>
 
     <div class="bg-teal-650 flex flex-wrap justify-center px-6 py-3">
-      <v-card v-for="product in products" :key="product.prodCode" class="flex-shrink-0 card" @click="openPopup(product)">
+      <v-card
+        v-for="product in products"
+        :key="product.prodCode"
+        class="flex-shrink-0 card"
+        @click="openPopup(product)"
+      >
         <v-img :src="product.image" class="prodImage"></v-img>
       </v-card>
     </div>
@@ -18,37 +23,44 @@
 
 
 <script>
-import axios from 'axios';
-import popUpCard from '@/components/popUpCard.vue'
-
-
+import axios from "axios";
+import popUpCard from "@/components/popUpCard.vue";
+import { useCartStore } from "~/store/cart";
 
 export default {
   components: {
-    popUpCard
+    popUpCard,
   },
-    props:['category'],
+  props: ["category"],
 
-    data(){
-    return {products: [],
-            selectedProduct: null,}
+  data() {
+    return {
+      products: [],
+      cartStore: useCartStore(),
+      selectedProduct: null,
+    };
+  },
+  beforeRouteEnter(to, from, next) {
+    this.cartStore.setInSellSomethingFlag(true);
+    this.cartStore.setInHomeFlag(false);
   },
 
   created() {
-    this.loadProducts(this.category)
+    this.loadProducts(this.category);
   },
   computed: {
     productFilter(category) {
-        //TODO: implement product filter 
+      //TODO: implement product filter
     },
   },
 
   methods: {
     loadProducts(category) {
-      const extension = '/backend/products';
+      const extension = "/backend/products";
       const params = { params: { category: category } };
 
-      axios.get('http://127.0.0.1:8000/' + extension, params) //http://127.0.0.1:8000/
+      axios
+        .get("http://127.0.0.1:8000/" + extension, params) //http://127.0.0.1:8000/
         .then((response) => {
           console.log(response.data);
           this.products = response.data;
@@ -63,10 +75,9 @@ export default {
     },
     closePopUp() {
       this.selectedProduct = null;
-    }
+    },
   },
-
-}
+};
 </script>
 
 <style scoped>

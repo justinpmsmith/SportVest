@@ -37,9 +37,12 @@ export default {
 
   created() {
     this.cartStore.setInCartFlag(true);
+    this.cartStore.setInHomeFlag(false);
   },
   beforeRouteLeave(to, from, next) {
     this.cartStore.setInCartFlag(false);
+    this.cartStore.setInHomeFlag(true);
+
     next();
   },
   methods: {

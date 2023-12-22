@@ -28,14 +28,17 @@
 <script>
   import axios from 'axios';
   import bgImg from '../assets/static/home_bg.jpeg';
+  import { useCartStore } from '~/store/cart';
 
 
 export default {
   data() {
     return {
       bg_img: bgImg,
+      cartStore: useCartStore(),
     }
-  }
+  },
+
 
 }
 

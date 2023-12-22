@@ -1,0 +1,7 @@
+* Add 'sold' table
+* Add checkout page
+* on checkout send prod info to backend to remove from products and add to sold
+* email receipt to buyer
+
+* payment successful page
+* payment canceled page

@@ -30,9 +30,9 @@
 </template>
   
   <script>
-import { useCartStore } from '~/store/cart';
-import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
+import { useCartStore } from "~/store/cart";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 export default {
   props: {
     product: Object,
@@ -58,7 +58,7 @@ export default {
     },
     addToCart() {
       this.cartStore.addToCart(this.product);
-      console.log('cart');
+      console.log("cart");
       console.log(this.cartStore.cart);
 
       toast("Product added to cart", {
@@ -67,7 +67,7 @@ export default {
       this.closePopup();
     },
     closePopup() {
-      this.$emit('close-popup'); // Emit an event called 'close-popup'
+      this.$emit("close-popup"); // Emit an event called 'close-popup'
     },
   },
 };
@@ -91,6 +91,8 @@ export default {
   padding: 1rem;
   position: relative;
   background-color: rgba(0, 0, 0, 0.5);
+  max-height: 100vh; /* 100% of the viewport height */
+  overflow-y: auto; /* Enable vertical scrolling if needed */
 }
 
 .popup-content {
