@@ -57,13 +57,18 @@ export default {
       document.body.removeChild(el);
     },
     addToCart() {
-      this.cartStore.addToCart(this.product);
-      console.log("cart");
-      console.log(this.cartStore.cart);
+      let result = this.cartStore.addToCart(this.product);
+      console.log("cart total: " + this.cartStore.getCartTotal);
 
-      toast("Product added to cart", {
-        autoClose: 1000,
-      });
+      if (result) {
+        toast("Product added to cart", {
+          autoClose: 500,
+        });
+      } else {
+        toast("Item already in cart", {
+          autoClose: 500,
+        });
+      }
       this.closePopup();
     },
     closePopup() {

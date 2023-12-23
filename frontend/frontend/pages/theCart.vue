@@ -1,6 +1,10 @@
 <template>
   <div>
-    <h2 class="text-white text-2xl text-center my-8">Your Cart</h2>
+    <theHeader :inCart="true" :inSellSomething="false"> </theHeader>
+
+    <h1 class="text-white text-4xl text-center my-8">Your Cart</h1>
+    <h1 class="text-white text-2xl text-center my-8">Cart Total: R{{ cartTotal }}</h1>
+    
 
     <div v-if="Object.keys(cartStore.cart).length">
       <div
@@ -21,35 +25,47 @@
     <!-- product list  -->
 
     <div v-else>
-      <p class="text-white">Your cart is empty</p>
+      <p class="text-white text-center">Your cart is empty</p>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   </div>
 </template>
 <script>
 import { useCartStore } from "~/store/cart";
+import theHeader from "~/components/theHeader.vue";
+
 export default {
+  components: {
+    theHeader,
+  },
   data() {
     return {
       cartStore: useCartStore(),
-      inCart: false,
+      
     };
   },
-
-  created() {
-    this.cartStore.setInCartFlag(true);
-    this.cartStore.setInHomeFlag(false);
-  },
-  beforeRouteLeave(to, from, next) {
-    this.cartStore.setInCartFlag(false);
-    this.cartStore.setInHomeFlag(true);
-
-    next();
+  computed:{
+    cartTotal(){
+      let total = this.cartStore.getCartTotal;
+      return total;
+    },
   },
   methods: {
-    removeFromCart(prodCode){
-        this.cartStore.removeFromCart(prodCode);
-    }
-  }
+    removeFromCart(prodCode) {
+      this.cartStore.removeFromCart(prodCode);
+    },
+  },
 };
 </script>
 <style scoped>
@@ -96,5 +112,4 @@ export default {
   cursor: pointer;
   font-size: 12px;
 }
-
 </style>
