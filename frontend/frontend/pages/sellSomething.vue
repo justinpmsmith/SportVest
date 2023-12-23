@@ -1,4 +1,6 @@
 <template>
+  <theHeader :inCart="false" :inSellSomething="true"> </theHeader>
+
   <div class="form-wrapper">
     <form @submit.prevent="submitForm" class="form-content">
       <div class="form-group">
@@ -86,9 +88,12 @@
   <script>
 import axios from "axios";
 import { useCartStore } from "~/store/cart";
-
+import theHeader from "~/components/theHeader.vue";
 
 export default {
+  components: {
+    theHeader,
+  },
   data() {
     return {
       cartStore: useCartStore(),
@@ -96,19 +101,10 @@ export default {
       price: null,
       images: [],
       cell: "",
-      email:""
+      email: "",
     };
   },
-  created() {
-    this.cartStore.setInSellSomethingFlag(true);
-    this.cartStore.setInHomeFlag(false);
-  },
-  beforeRouteLeave(to, from, next) {
-    this.cartStore.setInSellSomethingFlag(false);
-    this.cartStore.setInHomeFlag(true);
 
-    next();
-  },
   methods: {
     onImageChange(index) {
       const fileInput = event.target;
@@ -121,38 +117,56 @@ export default {
     },
     async submitForm() {
       try {
-        var extension = "/backend/submit-form/";
-        var localHost = "http://127.0.0.1:8000";
-        var endpoint1 = localHost + extension;
-        const formData = new FormData();
-        formData.append("description", this.description);
-        formData.append("price", this.price);
-        formData.append("cell", this.cell);
-        this.images.forEach((image, index) => {
-          formData.append("images", image, `image${index + 1}`);
-        });
+        if (this.validateForm()) {
+          var extension = "/backend/submit-form/";
+          var localHost = "http://127.0.0.1:8000";
+          var endpoint1 = localHost + extension;
+          const formData = new FormData();
+          formData.append("description", this.description);
+          formData.append("price", this.price);
+          formData.append("cell", this.cell);
+          this.images.forEach((image, index) => {
+            formData.append("images", image, `image${index + 1}`);
+          });
 
-        const response = await axios.post(endpoint1, formData);
-        console.log(
-          "########################## response: " + response.data.message
-        );
-
-        this.description = "";
-        this.price = null;
-        this.cell = "";
-        this.images = [];
-        this.email = "";
-
-        if (response.data.message === "success") {
-          alert(
-            "Your product submission has been uploaded. We will contact you shortly."
+          const response = await axios.post(endpoint1, formData);
+          console.log(
+            "########################## response: " + response.data.message
           );
-        } else {
-          alert("there was an issue uploading your product.please try again");
+
+          this.description = "";
+          this.price = null;
+          this.cell = "";
+          this.images = [];
+          this.email = "";
+
+          if (response.data.message === "success") {
+            alert(
+              "Your product submission has been uploaded. We will contact you shortly."
+            );
+          } else {
+            alert("there was an issue uploading your product.please try again");
+          }
+        }else{
+          alert("Please fill in all the fields");
         }
       } catch (error) {
         console.error(error);
       }
+    },
+    validateForm() {
+      if (this.description == "") {
+        return false;
+      } else if (this.price == null) {
+        return false;
+      } else if (this.cell == "") {
+        return false;
+      } else if (this.images.length == 0) {
+        return false;
+      } else if ((this.email = "")) {
+        return false;
+      }
+      return true;
     },
   },
 };
@@ -197,7 +211,6 @@ input[type="email"] {
   border-radius: 4px;
   border: 1px solid #ccc;
 }
-
 
 button {
   padding: 0.5rem 1rem;

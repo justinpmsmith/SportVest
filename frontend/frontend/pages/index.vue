@@ -1,5 +1,6 @@
 <template>
   <div class="text-center" >
+    <theHeader></theHeader>
     <div
       class="flex flex-col items-center justify-center px-6 py-3 "
     >
@@ -26,12 +27,16 @@
   </div>
 </template>
 <script>
-  import axios from 'axios';
+  // import axios from 'axios';
   import bgImg from '../assets/static/home_bg.jpeg';
   import { useCartStore } from '~/store/cart';
+  import theHeader from '~/components/theHeader.vue';
 
 
 export default {
+  components: {
+    theHeader,
+  },
   data() {
     return {
       bg_img: bgImg,

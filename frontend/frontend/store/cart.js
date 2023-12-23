@@ -2,13 +2,13 @@
 
 import { defineStore } from 'pinia';
 
+
 export const useCartStore = defineStore('cart', {
   state: () => {
     return{
     cartItems: {},
-    inCart: false,
-    inHome:true,
-    inSellSomething: false, 
+    cartTotal: 0,
+    buyerInfo: {},
   }
   },
   persist: {
@@ -16,32 +16,37 @@ export const useCartStore = defineStore('cart', {
   },
   getters: {
     cart: (state) => state.cartItems,
-    inCartFlag: (state) => state.inCart,
-    inHomeFlag: (state) => state.inHome,
-    inSellSomethingFlag: (state) => state.inSellSomething,
-    
+    getCartTotal: (state) => state.cartTotal,
+    getbuyerInfo: (state) => state.buyerInfo,
   },
   actions: {
     addToCart(product) {
-      
-      this.cartItems[product.prodCode] = product;
+      if(!Object.hasOwn( this.cartItems, product.prodCode))
+      {
+        console.log("item already in cart")
+        this.cartItems[product.prodCode] = product;
+        this.cartTotal += product.price;
+        return true;
+      }
+      console.log("item added")
+
+      return false;
+
     },
     removeFromCart(prodCode) {
       if (this.cartItems[prodCode]) {
+        this.cartTotal -= this.cartItems[prodCode].price;
         delete this.cartItems[prodCode];
       }
     },
     clearCart() {
         this.cartItems = {};
+        this.cartTotal = 0;
       },
-      setInCartFlag(value){
-        this.inCart = value;
-      },
-      setInHomeFlag(value){
-        this.inHome = value;
-      },
-      setInSellSomethingFlag(value){
-        this.inSellSomething = value;
-      }
+    addBuyerInfo(info){
+      this.buyerInfo = info;
+      this.buyerInfo.products = this.cartItems;
+    }
+
   },
 });

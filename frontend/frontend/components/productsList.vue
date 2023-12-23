@@ -1,5 +1,6 @@
 <template>
   <div>
+    <theHeader :inCart="false" :inSellSomething="false"> </theHeader>
     <h2 class="category-heading">{{ category }}</h2>
 
     <div class="bg-teal-650 flex flex-wrap justify-center px-6 py-3">
@@ -26,10 +27,12 @@
 import axios from "axios";
 import popUpCard from "@/components/popUpCard.vue";
 import { useCartStore } from "~/store/cart";
+import theHeader from "./theHeader.vue";
 
 export default {
   components: {
     popUpCard,
+    theHeader,
   },
   props: ["category"],
 
@@ -40,10 +43,7 @@ export default {
       selectedProduct: null,
     };
   },
-  beforeRouteEnter(to, from, next) {
-    this.cartStore.setInSellSomethingFlag(true);
-    this.cartStore.setInHomeFlag(false);
-  },
+
 
   created() {
     this.loadProducts(this.category);
