@@ -89,6 +89,8 @@
 import axios from "axios";
 import { useCartStore } from "~/store/cart";
 import theHeader from "~/components/theHeader.vue";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 export default {
   components: {
@@ -116,8 +118,12 @@ export default {
       console.log(this.images);
     },
     async submitForm() {
+      // Display a toast message at the beginning
+
       try {
         if (this.validateForm()) {
+          const toastId = toast("Uploading product information");
+          console.log("email: " + this.email);
           var extension = "/backend/submit-form/";
           var localHost = "http://127.0.0.1:8000";
           var endpoint1 = localHost + extension;
@@ -125,11 +131,21 @@ export default {
           formData.append("description", this.description);
           formData.append("price", this.price);
           formData.append("cell", this.cell);
+          formData.append("email", this.email);
+
           this.images.forEach((image, index) => {
             formData.append("images", image, `image${index + 1}`);
           });
 
-          const response = await axios.post(endpoint1, formData);
+          const timeoutPromise = new Promise((_, reject) =>
+            setTimeout(() => reject(new Error("Request timed out")), 30000)
+          );
+
+          const response = await Promise.race([
+            axios.post(endpoint1, formData),
+            timeoutPromise,
+          ]);
+
           console.log(
             "########################## response: " + response.data.message
           );
@@ -137,7 +153,7 @@ export default {
           this.description = "";
           this.price = null;
           this.cell = "";
-          this.images = [];
+          this.images = "";
           this.email = "";
 
           if (response.data.message === "success") {
@@ -145,13 +161,21 @@ export default {
               "Your product submission has been uploaded. We will contact you shortly."
             );
           } else {
-            alert("there was an issue uploading your product.please try again");
+            alert(
+              "There was an issue uploading your product. Please try again."
+            );
           }
-        }else{
-          alert("Please fill in all the fields");
+        } else {
+          alert(
+            "Please fill in all the fields and upload at least 1 picture of the product"
+          );
         }
       } catch (error) {
         console.error(error);
+        alert("There was an issue uploading your product. Please try again.");
+      } finally {
+        // Close the toast once the method execution is completed
+        toast.clear(toastId);
       }
     },
     validateForm() {
@@ -163,7 +187,7 @@ export default {
         return false;
       } else if (this.images.length == 0) {
         return false;
-      } else if ((this.email = "")) {
+      } else if (this.email == "") {
         return false;
       }
       return true;

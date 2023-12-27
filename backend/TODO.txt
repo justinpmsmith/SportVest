@@ -1,8 +1,8 @@
-* Add 'sold' table
+* Add contact us page
 * link payfast to checkout page
 
 * payment successful page
-    * remove items from products and add to sold
+    * remove items from products table and add to sold table
     * email receipt to user
     * email buyer information to admin
 
@@ -10,3 +10,5 @@
     * redirect to home page
 
 * figure out how to host
+
+* NB!!! go through settings.py file before deploying

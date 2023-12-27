@@ -34,8 +34,31 @@
     </div>
   </div>
 
-  <div v-if="formStep == 2">hello world</div>
+  <div v-if="formStep == 2">
+    <div class="form-wrapper">
+      <form class="form-content">
+        <label class="text-center text-2xl">Total</label>
+        <label class="text-center" >R{{ cartTotal }}</label>
 
+        <div class="row">
+          <button class="submit-button" @click="previous">Previous</button>
+
+          <button class="submit-button" type="submit">Pay Now</button>
+        </div>
+      </form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
 </template>
 
 <script>
@@ -57,6 +80,12 @@ export default {
       email: "",
     };
   },
+  computed: {
+    cartTotal() {
+      let total = this.cartStore.getCartTotal;
+      return total;
+    },
+  },
   methods: {
     submitForm() {
       if (this.validateForm()) {
@@ -70,11 +99,14 @@ export default {
         this.cartStore.addBuyerInfo(info);
         console.log("info");
         console.log(info);
-        this.formStep++;
+        this.formStep = 2;
         this;
       } else {
         alert("Please fill in all the fields");
       }
+    },
+    previous() {
+      this.formStep = 1;
     },
     validateForm() {
       if (this.name == "") {
@@ -85,7 +117,7 @@ export default {
         return false;
       } else if (this.postal == "") {
         return false;
-      } else if ((this.email = "")) {
+      } else if ((this.email == "")) {
         return false;
       }
       return true;
@@ -148,35 +180,11 @@ button {
   margin-right: auto;
 }
 
-.selling-process {
-  /* Add styles to center the content horizontally */
+.row {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   text-align: center;
-}
-
-.selling-process h2 {
-  /* Add styles to restore the numbered bullets */
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-.selling-process ol {
-  /* Add styles to restore the numbered bullets */
-  text-align: left;
-  list-style-type: decimal;
-  padding-left: 2rem;
-  margin-bottom: 1rem;
-  color: white;
-}
-
-.selling-process p {
-  /* Adjust text color */
-}
-.selling-process li {
-  margin-bottom: 0.5rem;
 }
 </style>

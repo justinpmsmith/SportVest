@@ -1,7 +1,22 @@
 <template>
   <div>
     <theHeader :inCart="false" :inSellSomething="false"> </theHeader>
-    <h2 class="category-heading">{{ category }}</h2>
+    <h2 class="text-white text-4xl text-center my-8">{{ formattedCategory }}</h2>
+    <div v-if="products.length == 0">
+      <h2 class="text-white text-2xl text-center my-8">
+        No products for this category
+      </h2>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+    </div>
 
     <div class="bg-teal-650 flex flex-wrap justify-center px-6 py-3">
       <v-card
@@ -44,16 +59,21 @@ export default {
     };
   },
 
-
   created() {
     this.loadProducts(this.category);
   },
   computed: {
-    productFilter(category) {
-      //TODO: implement product filter
+    formattedCategory() {
+      // Check if 'category' contains underscores
+      if (this.category.includes("_")) {
+        // Replace underscores with spaces
+        return this.category.replace(/_/g, " ");
+      } else {
+        // If no underscores, return 'category' as is
+        return this.category;
+      }
     },
   },
-
   methods: {
     loadProducts(category) {
       const extension = "/backend/products";

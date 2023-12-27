@@ -40,21 +40,22 @@ class SellSomethingForm(APIView):
 
         images = request.FILES.getlist('images')
 
-        subject = 'New Product'
+        subject = 'New Product ' + email_addr
         message = f"Description: {description}\nPrice: {price}\nCell: {cell} \nEmail: {email_addr}"
         from_email = settings.EMAIL_HOST_USER
         to_email = ['justinpmsmith10@gmail.com']
 
-        # email = EmailMessage(subject, message, from_email, to_email)
-        #
-        # # Attach the images to the email
-        # for image in images:
-        #     email.attach(image.name, image.read(), image.content_type)
-        #
-        # # Send the email
-        # email.send()
-        #
-        # print("################  Emial sent    ####################")
+
+        email = EmailMessage(subject, message, from_email, to_email)
+
+        # Attach the images to the email
+        for image in images:
+            email.attach(image.name, image.read(), image.content_type)
+
+        # Send the email
+        email.send()
+
+        print("################  Email sent    ####################")
 
         return Response({'message': 'success'})
 
