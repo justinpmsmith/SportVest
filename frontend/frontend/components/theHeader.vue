@@ -3,7 +3,11 @@
     <!-- Center the logo and buttons -->
     <div class="logo-container">
       <div @click="goHome">
-        <img src="../assets/static/logo.png" alt="Home" class="logo-image" />
+        <img
+          src="../assets/static/logo-no-bg.png"
+          alt="Home"
+          class="logo-image"
+        />
       </div>
     </div>
 
@@ -33,6 +37,7 @@
 
     <div class="button-container mt-4" v-else-if="inCart">
       <div
+        v-if="Object.keys(cartStore.cart).length"
         @click="clearCart"
         class="py-3 px-6 bg-gray-800 text-white rounded-md whitespace-nowrap font-bold nav-links"
       >
@@ -89,7 +94,7 @@ export default {
       this.cartStore.clearCart();
     },
     checkout() {
-        this.$router.push("/checkout");
+      this.$router.push("/checkout");
     },
     goHome() {
       this.$router.push("/");

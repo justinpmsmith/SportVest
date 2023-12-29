@@ -91,6 +91,7 @@ import { useCartStore } from "~/store/cart";
 import theHeader from "~/components/theHeader.vue";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
+import { config } from "~/config";
 
 export default {
   components: {
@@ -123,15 +124,17 @@ export default {
       try {
         if (this.validateForm()) {
           const toastId = toast("Uploading product information");
-          console.log("email: " + this.email);
-          var extension = "/backend/submit-form/";
-          var localHost = "http://127.0.0.1:8000";
-          var endpoint1 = localHost + extension;
+       
+          var extension = config.sellSomethingExt;
+          var api = config.apiUrl;
+          var endpoint1 = api + extension;
+
           const formData = new FormData();
           formData.append("description", this.description);
           formData.append("price", this.price);
           formData.append("cell", this.cell);
           formData.append("email", this.email);
+
 
           this.images.forEach((image, index) => {
             formData.append("images", image, `image${index + 1}`);

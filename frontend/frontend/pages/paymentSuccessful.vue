@@ -4,18 +4,27 @@
     <div class="form-wrapper">
       <div class="form-content">
         <label class="text-center text-4xl">Payment Succesful</label>
-        <label class="text-center text-2xl">Check your email for the receipt</label>
-
-
-        <button class="submit-button" @click="previous">Continue shopping</button>
-
+        <label class="text-center text-2xl"
+          >Check your email for the receipt</label
+        >
+        <NuxtLink to="/">
+          <button class="submit-button">Continue shopping</button>
+        </NuxtLink>
+      </div>
     </div>
-    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
   </div>
 </template>
   <script>
 import { useCartStore } from "~/store/cart";
 import theHeader from "~/components/theHeader.vue";
+import { config } from "~/config";
+import axios from "axios";
 
 export default {
   components: {
@@ -26,8 +35,27 @@ export default {
       cartStore: useCartStore(),
     };
   },
-  computed: {},
-  methods: {},
+  async created() {
+    console.log("created")
+    await this.submitPurchase();
+  },
+  methods: {
+    async submitPurchase() {
+      let buyerInfo = this.cartStore.getbuyerInfo;
+      this.cartStore.clearCart();
+      let endpoint = config.apiUrl + config.soldItemsExt;
+      try {
+        let response = await axios.post(endpoint, buyerInfo, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
 };
 </script>
 

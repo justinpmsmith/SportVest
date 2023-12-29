@@ -1,8 +1,8 @@
 * Add contact us page
 * link payfast to checkout page
 
+
 * payment successful page
-    * remove items from products table and add to sold table
     * email receipt to user
     * email buyer information to admin
 

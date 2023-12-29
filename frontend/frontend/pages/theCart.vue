@@ -3,7 +3,7 @@
     <theHeader :inCart="true" :inSellSomething="false"> </theHeader>
 
     <h1 class="text-white text-4xl text-center my-8">Your Cart</h1>
-    <h1 class="text-white text-2xl text-center my-8">Cart Total: R{{ cartTotal }}</h1>
+    <h1 class="text-white text-2xl text-center my-8" v-if="Object.keys(cartStore.cart).length">Cart Total: R{{ cartTotal }}</h1>
     
 
     <div v-if="Object.keys(cartStore.cart).length">

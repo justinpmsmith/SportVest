@@ -27,6 +27,7 @@
       >
         <v-img :src="product.image" class="prodImage"></v-img>
       </v-card>
+
     </div>
 
     <PopUpCard
@@ -34,6 +35,9 @@
       :product="selectedProduct"
       @close-popup="closePopUp"
     ></PopUpCard>
+    <br>
+      <br>
+      <br>
   </div>
 </template>
 
@@ -43,6 +47,7 @@ import axios from "axios";
 import popUpCard from "@/components/popUpCard.vue";
 import { useCartStore } from "~/store/cart";
 import theHeader from "./theHeader.vue";
+import { config } from "~/config";
 
 export default {
   components: {
@@ -76,11 +81,10 @@ export default {
   },
   methods: {
     loadProducts(category) {
-      const extension = "/backend/products";
       const params = { params: { category: category } };
 
       axios
-        .get("http://127.0.0.1:8000/" + extension, params) //http://127.0.0.1:8000/
+        .get(config.apiUrl + config.loadProductsExt, params) 
         .then((response) => {
           console.log(response.data);
           this.products = response.data;

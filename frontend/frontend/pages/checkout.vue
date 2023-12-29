@@ -32,13 +32,16 @@
         <button class="submit-button" type="submit">Next</button>
       </form>
     </div>
+    <br />
+    <br />
+    <br />
   </div>
 
   <div v-if="formStep == 2">
     <div class="form-wrapper">
       <form class="form-content">
         <label class="text-center text-2xl">Total</label>
-        <label class="text-center" >R{{ cartTotal }}</label>
+        <label class="text-center">R{{ cartTotal }}</label>
 
         <div class="row">
           <button class="submit-button" @click="previous">Previous</button>
@@ -47,17 +50,17 @@
         </div>
       </form>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
   </div>
 </template>
 
@@ -89,12 +92,15 @@ export default {
   methods: {
     submitForm() {
       if (this.validateForm()) {
+        let total = this.cartStore.getCartTotal;
+
         let info = {
           name: this.name,
           address: this.address,
           postal: this.postal,
           cell: this.cell,
           email: this.email,
+          totalPrice: total,
         };
         this.cartStore.addBuyerInfo(info);
         console.log("info");
@@ -117,7 +123,7 @@ export default {
         return false;
       } else if (this.postal == "") {
         return false;
-      } else if ((this.email == "")) {
+      } else if (this.email == "") {
         return false;
       }
       return true;

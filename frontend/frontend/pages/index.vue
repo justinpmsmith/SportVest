@@ -1,37 +1,74 @@
 <template>
-  <div class="text-center" >
+  <div class="text-center">
     <theHeader></theHeader>
-    <div
-      class="flex flex-col items-center justify-center px-6 py-3 "
-    >
+    <div class="flex flex-col items-center justify-center px-6 py-3">
       <h1 class="text-md text-white">Once Loved Sports Equipment And Shoes</h1>
       <h1 class="text-7xl text-white">SPORTVEST</h1>
     </div>
 
-<div class="catagories ">
-    <NuxtLink to="/products/cricket" class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton">Cricket</NuxtLink>
-    <NuxtLink to="/products/rugby" class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton">Rugby</NuxtLink>
-    <NuxtLink to="/products/hockey" class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton">Hockey</NuxtLink>
-    <NuxtLink to="/products/golf" class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton">Golf</NuxtLink>
-    <NuxtLink to="/products/shoes" class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton">Shoes</NuxtLink>
-    <NuxtLink to="/products/athletics" class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton">Athletics</NuxtLink>
-    <NuxtLink to="/products/tennis" class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton">Tennis</NuxtLink>
-    <NuxtLink to="/products/other" class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton">Other</NuxtLink>
-    <NuxtLink to="/products/all" class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton">All</NuxtLink>
-    <NuxtLink to="/products/horseRiding" class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton">Horse Riding</NuxtLink>
-    
+    <div class="catagories">
+      <NuxtLink
+        to="/products/cricket"
+        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
+        >Cricket</NuxtLink
+      >
+      <NuxtLink
+        to="/products/rugby"
+        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
+        >Rugby</NuxtLink
+      >
+      <NuxtLink
+        to="/products/hockey"
+        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
+        >Hockey</NuxtLink
+      >
+      <NuxtLink
+        to="/products/golf"
+        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
+        >Golf</NuxtLink
+      >
+      <NuxtLink
+        to="/products/shoes"
+        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
+        >Shoes</NuxtLink
+      >
+      <NuxtLink
+        to="/products/athletics"
+        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
+        >Athletics</NuxtLink
+      >
+      <NuxtLink
+        to="/products/tennis"
+        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
+        >Tennis</NuxtLink
+      >
+      <NuxtLink
+        to="/products/other"
+        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
+        >Other</NuxtLink
+      >
+      <NuxtLink
+        to="/products/all"
+        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
+        >All</NuxtLink
+      >
+      <NuxtLink
+        to="/products/horseRiding"
+        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
+        >Horse Riding</NuxtLink
+      >
 
-
-
-</div>
+      <br />
+      <br />
+      <br />
+    </div>
   </div>
 </template>
 <script>
-  // import axios from 'axios';
-  import bgImg from '../assets/static/home_bg.jpeg';
-  import { useCartStore } from '~/store/cart';
-  import theHeader from '~/components/theHeader.vue';
-
+// import axios from 'axios';
+import bgImg from "../assets/static/home_bg.jpeg";
+import { useCartStore } from "~/store/cart";
+import theHeader from "~/components/theHeader.vue";
 
 export default {
   components: {
@@ -41,12 +78,9 @@ export default {
     return {
       bg_img: bgImg,
       cartStore: useCartStore(),
-    }
+    };
   },
-
-
-}
-
+};
 </script>
 
 
