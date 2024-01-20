@@ -1,13 +1,18 @@
-from reportlab.platypus import SimpleDocTemplate, Table, Paragraph, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Table, Paragraph, TableStyle, Image, Spacer
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A6
 from reportlab.lib.styles import getSampleStyleSheet
 from io import BytesIO
+import os
+from django.core.mail import EmailMessage
+from .models import Product, Sold, Receipt
+
+from django.conf import settings
 
 
 class Utils:
     @staticmethod
-    def generateReceipt(product_data, receipt_no, total_price):
+    def generateReceipt(product_data, receipt_info):
         # Data for the table
         table_data = [
             ["Product Code", "Product Name", "Price (R)"],
@@ -21,12 +26,12 @@ class Utils:
 
         # Add the total row to the table
         table_data.append(["", "", ""])
-        table_data.append(["Total", '', f"{total_price:.2f}"])
+        table_data.append(["Total", '', f"{receipt_info['total_price']:.2f}"])
 
         # Create a BytesIO buffer for in-memory PDF content
         pdf_buffer = BytesIO()
 
-        # Create a Base Document Template of page size A4
+        # Create a Base Document Template of page size A6
         pdf = SimpleDocTemplate(pdf_buffer, pagesize=A6)
 
         # Standard stylesheet defined within reportlab itself
@@ -39,10 +44,11 @@ class Utils:
         title_style.fontSize = 6
 
         # Alignment: 0 for left, 1 for center, 2 for right
-        title_style.alignment = 1
+        title_style.alignment = 0
 
-        # Creating the paragraph with the heading text and passing the styles
-        title = Paragraph(f"Receipt Number: {receipt_no}", title_style)
+        # Load the logo image from the file
+        logo_path = os.path.join(os.path.dirname(__file__), 'assets', 'logo.png')
+        logo = Image(logo_path, width=50, height=50)  # Adjust the width and height as needed
 
         # Creating a Table Style object and defining the styles row-wise
         style = TableStyle(
@@ -59,8 +65,26 @@ class Utils:
         # Creating a table object and passing the style to it
         table = Table(table_data, style=style)
 
+        # Creating the paragraph with the heading text and passing the styles
+        title = Paragraph(f"Receipt Number: {receipt_info['receipt_no']} ", title_style)
+        billed_to = Paragraph(f"Billed to: {receipt_info['customer_name']} ", title_style)
+        delivery_method = Paragraph(f"Delivery Method: {receipt_info['delivery_type']} ", title_style)
+        delivery_address = Paragraph(f"Delivery Location: {receipt_info['delivery_location']} ", title_style)
+
+        new_line = Spacer(0, -15)
+
         # Building the actual PDF putting together all the elements
-        pdf.build([title, table])
+        pdf.build([Spacer(0, -40),
+                   logo,
+                   Spacer(0, 15),
+                   title,
+                   new_line,
+                   billed_to,
+                   new_line,
+                   delivery_method,
+                   new_line,
+                   delivery_address,
+                   table])
 
         # Get the PDF content from the buffer
         pdf_content = pdf_buffer.getvalue()
@@ -70,3 +94,66 @@ class Utils:
 
         # Return the PDF content
         return pdf_content
+
+    @staticmethod
+    def emailReceipt(pdf_receipt, info):
+        subject = f"SportVest receipt {info['receipt_no']}"
+        message = f"Dear {info['name']}, \n\n Thank you for your purchase " \
+                  f"\n\n Please confirm that the delivery information we have for this order is correct " \
+                  f"\n\n Delivery method: {info['deliveryMethod']}" \
+                  f"\n Location: {info['address']}" \
+                  f"\n Contact Cell: {info['cell']}" \
+                  f"\n\n If you have any queries please contact Cherise at {settings.ADMIN_EMAIL}" \
+                  f"\n\nThank you for your support"
+
+        from_email = settings.EMAIL_HOST_USER
+        to_email = [settings.ADMIN_EMAIL, info['email']]
+
+        email = EmailMessage(subject, message, from_email, to_email)
+
+        # Attach the PDF to the email
+        email.attach('SportVest_receipt.pdf', pdf_receipt, 'application/pdf')
+
+        # Send the email
+        email.send()
+
+    @staticmethod
+    def emailContactUsMessage(info):
+        subject = f"Contact us message"
+        message = f"Name {info['name']}" \
+                  f"\nEmail: ${info['email']}" \
+                  f"\nCell{info['cell']}" \
+                  f"\n\nMessage: {info['message']}"
+
+        from_email = settings.EMAIL_HOST_USER
+        to_email = [settings.ADMIN_EMAIL]
+
+        email = EmailMessage(subject, message, from_email, to_email)
+        email.send()
+
+        pass
+
+    @staticmethod
+    def updateDb(info):
+        products = info['products']
+        # add to receipts table
+        receipt_entry = Receipt(receiptNo=info['receipt_no'],
+                                buyerName=info['name'],
+                                cell=info['cell'],
+                                email=info['email'],
+                                address=info['address'],
+                                totalPrice=info['totalPrice'])
+        receipt_entry.save()
+        for product in products.values():
+            # remove Product from Produtcs table
+            print("product number: " + product['prodCode'])
+            db_product = Product.objects.get(prodCode=product['prodCode'])
+            db_product.delete()
+
+            # add to Sold table
+            sold_entry = Sold(prodName=product['name'],
+                              prodCode=product['prodCode'],
+                              price=product['price'],
+                              receipt=receipt_entry,
+                              receiptNo=info['receipt_no'])
+            sold_entry.save()

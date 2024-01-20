@@ -71,51 +71,31 @@ class SoldItems(APIView):
 
         info = request.data  # or request.json(), depending on your setup
         timestamp = datetime.now()
+        info['receipt_no'] = timestamp
 
         if info:
-            print(info['products'])
-
-            products = info['products']
-            # add to receipts table
-            receipt_entry = Receipt(receiptNo=timestamp,
-                                    buyerName=info['name'],
-                                    cell=info['cell'],
-                                    email=info['email'],
-                                    address=info['address'],
-                                    totalPrice=info['totalPrice'])
-            receipt_entry.save()
-            for product in products.values():
-                # remove Product from Produtcs table
-                db_product = Product.objects.get(prodCode=product['prodCode'])
-                db_product.delete()
-
-                # add to Sold table
-                sold_entry = Sold(prodName=product['name'],
-                                  prodCode=product['prodCode'],
-                                  price=product['price'],
-                                  receipt=receipt_entry,
-                                  receiptNo=timestamp)
-                sold_entry.save()
+            Utils.updateDb(info)
 
             # send digital receipt
-            pdf_receipt = Utils.generateReceipt(info['products'], timestamp, info['totalPrice'])
+            receipt_info = {
+                'receipt_no': timestamp,
+                'total_price': info['totalPrice'],
+                'customer_name': info['name'],
+                'delivery_type': info['deliveryMethod'],
+                'delivery_location': info['address'],
+            }
+            pdf_receipt = Utils.generateReceipt(info['products'], receipt_info)
+            Utils.emailReceipt(pdf_receipt, info)
 
-            subject = f"SportVest receipt {timestamp}"
-            message = f"Dear {info['name']}, \n\n Thank you for your purchase " \
-                      f"\n\n please confirm that the delivery information we have for this order is correct " \
-                      f"\n\n Location: PEP or Postnet at {info['address']}" \
-                      f"\n Contact Cell: {info['cell']}" \
-                      f"\n\n If there are any problems please contact Cherise at {settings.ADMIN_EMAIL }" \
-                      f"Thank you for your support"
+        return Response({'message': 'success'})
 
-            from_email = settings.EMAIL_HOST_USER
-            to_email = [settings.ADMIN_EMAIL, info['email']]
 
-            email = EmailMessage(subject, message, from_email, to_email)
+class ContactUS(APIView):
+    def post(self, request):
+        if not self.request.session.exists(self.request.session.session_key):
+            self.request.session.create()
 
-            # Attach the PDF to the email
-            email.attach('receipt.pdf', pdf_receipt, 'application/pdf')
-
-            # Send the email
-            email.send()
+        info = request.data  # or request.json(), depending on your setup
+        print(info)
+        Utils.emailContactUsMessage(info)
         return Response({'message': 'success'})

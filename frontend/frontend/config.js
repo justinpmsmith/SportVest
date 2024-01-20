@@ -3,4 +3,5 @@ export const config = {
     sellSomethingExt: "/backend/submit-form/",
     loadProductsExt: "/backend/products",
     soldItemsExt: "/backend/sold-items/",
+    contactUsExt: "/backend/contact-us/"
   };

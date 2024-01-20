@@ -10,7 +10,9 @@
           <input type="text" id="name" v-model="name" />
         </div>
         <div class="form-group">
-          <label for="address">PAXI or Postnet nearest to you:</label>
+          <label for="address"
+            >Address of PEP (PAXI) or Postnet nearest to you:</label
+          >
           <input type="text" id="address" v-model="address" />
         </div>
         <div class="form-group">
@@ -18,14 +20,29 @@
           <input type="number" id="postal" v-model="postal" />
         </div>
         <div class="form-group">
+          <label>Delivery Method:</label>
+          <div class="radio-group">
+            <input type="radio" id="PAXI" value="PAXI" v-model="deliveryMethod" />
+            <label class="radio-label" for="PAXI">PAXI</label>
+
+            <input
+              type="radio"
+              id="postnet"
+              value="Postnet"
+              v-model="deliveryMethod"
+            />
+            <label for="postnet" class="radio-label">Postnet</label>
+          </div>
+        </div>
+        <div class="form-group">
           <label for="cell"
-            >Cell Number (to keep in touch regarding delivery):</label
+            >Cell:</label
           >
           <input type="number" id="cell" v-model="cell" />
         </div>
         <div class="form-group">
           <label for="email"
-            >Email Address (where we will send the receipt):</label
+            >Email Address:</label
           >
           <input type="email" id="email" v-model="email" />
         </div>
@@ -81,6 +98,7 @@ export default {
       postal: "",
       cell: "",
       email: "",
+      deliveryMethod: "",
     };
   },
   computed: {
@@ -101,6 +119,7 @@ export default {
           cell: this.cell,
           email: this.email,
           totalPrice: total,
+          deliveryMethod: this.deliveryMethod,
         };
         this.cartStore.addBuyerInfo(info);
         console.log("info");
@@ -124,6 +143,8 @@ export default {
       } else if (this.postal == "") {
         return false;
       } else if (this.email == "") {
+        return false;
+      } else if (this.deliveryMethod === "") {
         return false;
       }
       return true;
@@ -193,4 +214,23 @@ button {
   flex-direction: row;
   text-align: center;
 }
+.radio-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.radio-group input {
+  margin-right: 2vw;
+  transform: scale(0.8); /* Adjust the scale factor to make them smaller */
+}
+
+/* Optional: Adjust the label size and padding if needed */
+.radio-group label {
+  font-size: 14px;
+  margin-right: 12vw;
+  padding-top: 1.5vw
+  /* padding-left: 2px;  */
+}
+
+
 </style>

@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import ProductViewSet, SellSomethingForm, SoldItems
+from .views import ProductViewSet, SellSomethingForm, SoldItems, ContactUS
 
 urlpatterns = [
     path('products/', include([
@@ -7,5 +7,6 @@ urlpatterns = [
     ])),
     path('submit-form/', SellSomethingForm.as_view(), name='submit_form'),
     path('sold-items/', SoldItems.as_view(), name='sold_items'),
+    path('contact-us/', ContactUS.as_view(), name='contact-us'),
 
 ]
