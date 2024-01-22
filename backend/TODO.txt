@@ -1,13 +1,6 @@
-* Add contact us page
 * link payfast to checkout page
 
-
-* payment successful page
-    * email receipt to user
-    * email buyer information to admin
-
-* payment canceled page
-    * redirect to home page
+* make docker compose file https://youtu.be/TSySwrQcevM?si=b8FJRb7PZUJVMO0a         https://www.youtube.com/watch?v=QePBbG5MoKk
 
 * figure out how to host
 

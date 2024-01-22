@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -17,7 +17,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.ngrok-free.app']
+ALLOWED_HOSTS = ['*']  # '127.0.0.1', '.ngrok-free.app'
 
 # Application definition
 
@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',  # add this
     'corsheaders',  # add this
-    'core', # add this
+    'core',  # add this
     'django_cleanup.apps.CleanupConfig',
 ]
 
@@ -45,10 +45,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
 # add this block below MIDDLEWARE
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
+    'http://host.docker.internal:3000'
 
 )
 CORS_ALLOWED_ORIGINS = [
@@ -57,9 +57,6 @@ CORS_ALLOWED_ORIGINS = [
     'http://host.docker.internal:3000'
     # Add this line
 ]
-
-
-
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -133,7 +130,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # add this
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
