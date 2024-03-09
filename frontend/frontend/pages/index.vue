@@ -8,22 +8,22 @@
 
     <div class="catagories">
       <NuxtLink
-        to="/products/cricket"
+        to="/products/Cricket"
         class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
         >Cricket</NuxtLink
       >
       <NuxtLink
-        to="/products/rugby"
+        to="/products/Rugby"
         class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
         >Rugby</NuxtLink
       >
       <NuxtLink
-        to="/products/hockey"
+        to="/products/Hockey"
         class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
         >Hockey</NuxtLink
       >
       <NuxtLink
-        to="/products/golf"
+        to="/products/Golf"
         class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
         >Golf</NuxtLink
       >
@@ -33,12 +33,12 @@
         >Shoes</NuxtLink
       >
       <NuxtLink
-        to="/products/athletics"
+        to="/products/Athletics"
         class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
         >Athletics</NuxtLink
       >
       <NuxtLink
-        to="/products/tennis"
+        to="/products/Tennis"
         class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
         >Tennis</NuxtLink
       >
@@ -53,7 +53,7 @@
         >All</NuxtLink
       >
       <NuxtLink
-        to="/products/horseRiding"
+        to="/products/Horse_Riding"
         class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
         >Horse Riding</NuxtLink
       >

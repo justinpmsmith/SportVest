@@ -1,6 +1,6 @@
 <template>
     <div>
-      <productsList :category="'Horse_Riding'"></productsList>
+      <productsList :category="'all'"></productsList>
     </div>
     
 </template>

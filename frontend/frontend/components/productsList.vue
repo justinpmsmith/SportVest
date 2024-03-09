@@ -65,6 +65,7 @@ export default {
   },
 
   created() {
+    console.log("Prod list cat: " + this.category)
     this.loadProducts(this.category);
   },
   computed: {

@@ -98,12 +98,12 @@ class Utils:
     @staticmethod
     def emailReceipt(pdf_receipt, info):
         subject = f"SportVest receipt {info['receipt_no']}"
-        message = f"Dear {info['name']}, \n\n Thank you for your purchase " \
-                  f"\n\n Please confirm that the delivery information we have for this order is correct " \
-                  f"\n\n Delivery method: {info['deliveryMethod']}" \
-                  f"\n Location: {info['address']}" \
-                  f"\n Contact Cell: {info['cell']}" \
-                  f"\n\n If you have any queries please contact Cherise at {settings.ADMIN_EMAIL}" \
+        message = f"Dear {info['name']}, \n\nThank you for your purchase " \
+                  f"\n\nPlease confirm that the delivery information we have for this order is correct " \
+                  f"\n\nDelivery method: {info['deliveryMethod']}" \
+                  f"\nLocation: {info['address']}" \
+                  f"\nContact Cell: {info['cell']}" \
+                  f"\n\nIf you have any queries please contact Cherise at {settings.ADMIN_EMAIL}" \
                   f"\n\nThank you for your support"
 
         from_email = settings.EMAIL_HOST_USER
