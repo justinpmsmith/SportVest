@@ -19,6 +19,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']  # '127.0.0.1', '.ngrok-free.app'
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -47,16 +48,16 @@ MIDDLEWARE = [
 ]
 
 # add this block below MIDDLEWARE
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',
-    'http://host.docker.internal:3000'
-
-)
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'http://host.docker.internal:3000'
-]
+# CORS_ORIGIN_WHITELIST = (
+#     'http://localhost:3000',
+#     'http://host.docker.internal:3000'
+#
+# )
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000',
+#     'http://127.0.0.1:3000',
+#     'http://host.docker.internal:3000'
+# ]
 
 ROOT_URLCONF = 'backend.urls'
 
