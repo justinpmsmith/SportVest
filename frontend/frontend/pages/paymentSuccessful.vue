@@ -42,6 +42,14 @@ export default {
   methods: {
     async submitPurchase() {
       let buyerInfo = this.cartStore.getbuyerInfo;
+
+      // add shipping fee 
+      buyerInfo['shipping_fee'] = this.cartStore.getShippingFee;
+  
+
+
+      console.log("buyer info: ")
+      console.log(JSON.stringify(buyerInfo));
       this.cartStore.clearCart();
       let endpoint = config.apiUrl + config.soldItemsExt;
       try {

@@ -9,6 +9,7 @@ export const useCartStore = defineStore('cart', {
     cartItems: {},
     cartTotal: 0,
     buyerInfo: {},
+    shippingFee: 120,
   }
   },
   persist: {
@@ -16,8 +17,15 @@ export const useCartStore = defineStore('cart', {
   },
   getters: {
     cart: (state) => state.cartItems,
-    getCartTotal: (state) => state.cartTotal,
+    getCartTotal: (state) => {
+      if( state.cartTotal == 0){return 0}
+      else{
+        return state.cartTotal + state.shippingFee;
+      }
+    },
     getbuyerInfo: (state) => state.buyerInfo,
+    getShippingFee: (state) => state.shippingFee,
+
   },
   actions: {
     addToCart(product) {

@@ -24,6 +24,8 @@ class Utils:
             product_price = product_info.get('price', 0)
             table_data.append([product_code, product_name, f"{product_price:.2f}"])
 
+        table_data.append(["", "Shipping", str(receipt_info['shipping_fee'])])
+
         # Add the total row to the table
         table_data.append(["", "", ""])
         table_data.append(["Total", '', f"{receipt_info['total_price']:.2f}"])
@@ -68,7 +70,7 @@ class Utils:
         # Creating the paragraph with the heading text and passing the styles
         title = Paragraph(f"Receipt Number: {receipt_info['receipt_no']} ", title_style)
         billed_to = Paragraph(f"Billed to: {receipt_info['customer_name']} ", title_style)
-        delivery_method = Paragraph(f"Delivery Method: {receipt_info['delivery_type']} ", title_style)
+
         delivery_address = Paragraph(f"Delivery Location: {receipt_info['delivery_location']} ", title_style)
 
         new_line = Spacer(0, -15)
@@ -80,8 +82,6 @@ class Utils:
                    title,
                    new_line,
                    billed_to,
-                   new_line,
-                   delivery_method,
                    new_line,
                    delivery_address,
                    table])
@@ -100,7 +100,6 @@ class Utils:
         subject = f"SportVest receipt {info['receipt_no']}"
         message = f"Dear {info['name']}, \n\nThank you for your purchase " \
                   f"\n\nPlease confirm that the delivery information we have for this order is correct " \
-                  f"\n\nDelivery method: {info['deliveryMethod']}" \
                   f"\nLocation: {info['address']}" \
                   f"\nContact Cell: {info['cell']}" \
                   f"\n\nIf you have any queries please contact Cherise at {settings.ADMIN_EMAIL}" \

@@ -20,6 +20,7 @@ class Product(models.Model):
     name = models.CharField(max_length=120)
     prodCode = models.CharField(max_length=10)
     category = models.CharField(choices=CATEGORIES, max_length=20)
+    description = models.TextField(default="")
     image = models.FileField()
     shoes = models.BooleanField(default=False)
     price = models.FloatField(default=9999)

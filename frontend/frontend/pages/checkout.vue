@@ -1,4 +1,5 @@
 <template>
+  <div>
   <theHeader :inCart="false" :inSellSomething="false"> </theHeader>
   <h1 class="text-white text-4xl text-center my-8">Checkout</h1>
 
@@ -11,28 +12,13 @@
         </div>
         <div class="form-group">
           <label for="address"
-            >Address of PEP (PAXI) or Postnet nearest to you:</label
+            >Address of  Postnet nearest to you:</label
           >
           <input type="text" id="address" v-model="address" />
         </div>
         <div class="form-group">
           <label for="postal">Postal Code:</label>
           <input type="number" id="postal" v-model="postal" />
-        </div>
-        <div class="form-group">
-          <label>Delivery Method:</label>
-          <div class="radio-group">
-            <input type="radio" id="PAXI" value="PAXI" v-model="deliveryMethod" />
-            <label class="radio-label" for="PAXI">PAXI</label>
-
-            <input
-              type="radio"
-              id="postnet"
-              value="Postnet"
-              v-model="deliveryMethod"
-            />
-            <label for="postnet" class="radio-label">Postnet</label>
-          </div>
         </div>
         <div class="form-group">
           <label for="cell"
@@ -79,6 +65,7 @@
     <br />
     <br />
   </div>
+</div>
 </template>
 
 <script>
@@ -98,7 +85,7 @@ export default {
       postal: "",
       cell: "",
       email: "",
-      deliveryMethod: "",
+      
     };
   },
   computed: {
@@ -119,7 +106,7 @@ export default {
           cell: this.cell,
           email: this.email,
           totalPrice: total,
-          deliveryMethod: this.deliveryMethod,
+        
         };
         this.cartStore.addBuyerInfo(info);
         console.log("info");
@@ -144,9 +131,7 @@ export default {
         return false;
       } else if (this.email == "") {
         return false;
-      } else if (this.deliveryMethod === "") {
-        return false;
-      }
+      } 
       return true;
     },
   },

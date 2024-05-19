@@ -24,6 +24,7 @@ class ProductViewSet(viewsets.ModelViewSet):
                 queryset = queryset.filter(shoes=True)
             else:
                 queryset = queryset.filter(category=category)
+                # print(queryset.description)
 
         return queryset
 
@@ -74,18 +75,20 @@ class SoldItems(APIView):
         info['receipt_no'] = timestamp
 
         if info:
-            Utils.updateDb(info)
+            # Utils.updateDb(info)
 
             # send digital receipt
             receipt_info = {
                 'receipt_no': timestamp,
                 'total_price': info['totalPrice'],
                 'customer_name': info['name'],
-                'delivery_type': info['deliveryMethod'],
+                # 'delivery_type': info['deliveryMethod'],
                 'delivery_location': info['address'],
+                'shipping_fee': info['shipping_fee'],
             }
             pdf_receipt = Utils.generateReceipt(info['products'], receipt_info)
             Utils.emailReceipt(pdf_receipt, info)
+            print("email sent")
 
         return Response({'message': 'success'})
 

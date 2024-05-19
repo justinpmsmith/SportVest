@@ -1,7 +1,9 @@
-* link payfast to checkout page
+* remove paxi as delivery option
 
-* make docker compose file https://youtu.be/TSySwrQcevM?si=b8FJRb7PZUJVMO0a         https://www.youtube.com/watch?v=QePBbG5MoKk
+* integrate sportvest email
 
-* figure out how to host
+* at shipping fee to cart
+
+* link pay fast to check out page
 
 * NB!!! go through settings.py file before deploying

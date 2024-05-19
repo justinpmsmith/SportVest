@@ -3,10 +3,16 @@
     <theHeader :inCart="true" :inSellSomething="false"> </theHeader>
 
     <h1 class="text-white text-4xl text-center my-8">Your Cart</h1>
-    <h1 class="text-white text-2xl text-center my-8" v-if="Object.keys(cartStore.cart).length">Cart Total: R{{ cartTotal }}</h1>
-    
+    <h1
+      class="text-white text-2xl text-center my-2"
+      v-if="Object.keys(cartStore.cart).length"
+    >
+      Cart Total: R{{ cartTotal }}
+    </h1>
 
     <div v-if="Object.keys(cartStore.cart).length">
+    <h6 class="text-white  text-center">Shipping fee(flat rate): R120</h6>
+
       <div
         v-for="product in Object.values(cartStore.cart)"
         :key="product.prodCode"
@@ -39,6 +45,10 @@
       <br />
       <br />
     </div>
+    <br />
+    <br />
+    <br />
+    <br />
   </div>
 </template>
 <script>
@@ -52,11 +62,10 @@ export default {
   data() {
     return {
       cartStore: useCartStore(),
-      
     };
   },
-  computed:{
-    cartTotal(){
+  computed: {
+    cartTotal() {
       let total = this.cartStore.getCartTotal;
       return total;
     },

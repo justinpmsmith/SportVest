@@ -4,6 +4,7 @@
       <v-card class="popup-content">
         <v-img :src="product.image" class="popup-image"></v-img>
         <div class="popup-message">
+          <div class="text-h6 text-sm-left" style="color:wheat;">{{product.description}}</div>
           <!-- <ul class="popup-list">
               <li class="popup-item">
                 <p class="popup-text">{{ message1 }}</p>
@@ -72,6 +73,7 @@ export default {
       this.closePopup();
     },
     closePopup() {
+      console.log(JSON.stringify(this.product));
       this.$emit("close-popup"); // Emit an event called 'close-popup'
     },
   },
