@@ -47,7 +47,7 @@ import axios from "axios";
 import popUpCard from "@/components/popUpCard.vue";
 import { useCartStore } from "~/store/cart";
 import theHeader from "./theHeader.vue";
-import { config } from "~/config";
+import config from "~/config";
 
 export default {
   components: {

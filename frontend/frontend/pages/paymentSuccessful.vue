@@ -23,7 +23,7 @@
   <script>
 import { useCartStore } from "~/store/cart";
 import theHeader from "~/components/theHeader.vue";
-import { config } from "~/config";
+import config from "~/config";
 import axios from "axios";
 
 export default {

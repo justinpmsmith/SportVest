@@ -1,4 +1,5 @@
 <template>
+  <div>
     <theHeader :inCart="false" :inSellSomething="true"> </theHeader>
   
     <div class="form-wrapper">
@@ -23,7 +24,7 @@
       </form>
     </div>
     <br />
-
+  </div>
   </template>
     
     <script>
@@ -32,7 +33,7 @@
   import theHeader from "~/components/theHeader.vue";
   import { toast } from "vue3-toastify";
   import "vue3-toastify/dist/index.css";
-  import { config } from "~/config";
+  import config from "~/config";
   
   export default {
     components: {

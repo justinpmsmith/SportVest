@@ -1,76 +1,92 @@
 <template>
   <div>
-  <theHeader :inCart="false" :inSellSomething="false"> </theHeader>
-  <h1 class="text-white text-4xl text-center my-8">Checkout</h1>
+    <theHeader :inCart="false" :inSellSomething="false"> </theHeader>
+    <h1 class="text-white text-4xl text-center my-8">Checkout</h1>
 
-  <div v-if="formStep == 1">
-    <div class="form-wrapper">
-      <form @submit.prevent="submitForm" class="form-content">
-        <div class="form-group">
-          <label for="name">Name:</label>
-          <input type="text" id="name" v-model="name" />
-        </div>
-        <div class="form-group">
-          <label for="address"
-            >Address of  Postnet nearest to you:</label
-          >
-          <input type="text" id="address" v-model="address" />
-        </div>
-        <div class="form-group">
-          <label for="postal">Postal Code:</label>
-          <input type="number" id="postal" v-model="postal" />
-        </div>
-        <div class="form-group">
-          <label for="cell"
-            >Cell:</label
-          >
-          <input type="number" id="cell" v-model="cell" />
-        </div>
-        <div class="form-group">
-          <label for="email"
-            >Email Address:</label
-          >
-          <input type="email" id="email" v-model="email" />
-        </div>
-        <button class="submit-button" type="submit">Next</button>
-      </form>
+    <div v-if="formStep == 1">
+      <div class="form-wrapper">
+        <form @submit.prevent="submitForm" class="form-content">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" v-model="name" />
+          </div>
+          <div class="form-group">
+            <label for="address">Address of Postnet nearest to you:</label>
+            <input type="text" id="address" v-model="address" />
+          </div>
+          <div class="form-group">
+            <label for="postal">Postal Code:</label>
+            <input type="number" id="postal" v-model="postal" />
+          </div>
+          <div class="form-group">
+            <label for="cell">Cell:</label>
+            <input type="number" id="cell" v-model="cell" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" v-model="email" />
+          </div>
+          <button class="submit-button" type="submit">Next</button>
+        </form>
+      </div>
+      <br />
+      <br />
+      <br />
     </div>
-    <br />
-    <br />
-    <br />
-  </div>
 
-  <div v-if="formStep == 2">
-    <div class="form-wrapper">
-      <form class="form-content">
-        <label class="text-center text-2xl">Total</label>
-        <label class="text-center">R{{ cartTotal }}</label>
+    <div v-if="formStep == 2">
+      <div class="form-wrapper">
+        <form class="form-content">
+          <label class="text-center text-2xl">Total</label>
+          <label class="text-center">R{{ cartTotal }}</label>
 
-        <div class="row">
-          <button class="submit-button" @click="previous">Previous</button>
+          <div class="row">
+            <button class="submit-button" @click="previous">Previous</button>
 
-          <button class="submit-button" type="submit">Pay Now</button>
-        </div>
-      </form>
+            <form
+              action="https://www.payfast.co.za/eng/process"
+              method="post"
+              class="submit-button"
+            >
+              <input type="hidden" name="merchant_id" :value="merchantId" />
+              <input type="hidden" name="merchant_key" :value="merchantKey" />
+              <input
+                type="hidden"
+                name="return_url"
+                :value="baseUrl + successUrl"
+              />
+              <input
+                type="hidden"
+                name="cancel_url"
+                :value="baseUrl + successUrl"
+              />
+              <!-- <input type="hidden" name="notify_url" value="https://www.example.com/notify"> -->
+              <input type="hidden" name="amount" :value="cartTotal" />
+              <input type="hidden" name="item_name" value="Sportvest Order" />
+              <button type="submit">Pay Now</button>
+            </form>
+          </div>
+        </form>
+      </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
   </div>
-</div>
 </template>
 
 <script>
 import { useCartStore } from "~/store/cart";
 import theHeader from "~/components/theHeader.vue";
+import config from "~/config";
 
 export default {
   components: {
@@ -85,15 +101,25 @@ export default {
       postal: "",
       cell: "",
       email: "",
-      
+      merchantId: "",
+      merchantKey: "",
+      cartTotal: 0,
+      baseUrl: "https://370b-165-255-36-241.ngrok-free.app",
+      successUrl: "/paymentSuccessful",
+      cancelUrl: "/paymentCancelled",
     };
   },
-  computed: {
-    cartTotal() {
-      let total = this.cartStore.getCartTotal;
-      return total;
-    },
+  created() {
+    this.merchantId = config.merchantId;
+    this.merchantKey = config.merchantKey;
+    this.cartTotal = this.cartStore.getCartTotal;
   },
+  // computed: {
+  //   cartTotal() {
+  //     let total = this.cartStore.getCartTotal;
+  //     return total;
+  //   },
+  // },
   methods: {
     submitForm() {
       if (this.validateForm()) {
@@ -106,7 +132,6 @@ export default {
           cell: this.cell,
           email: this.email,
           totalPrice: total,
-        
         };
         this.cartStore.addBuyerInfo(info);
         console.log("info");
@@ -131,7 +156,7 @@ export default {
         return false;
       } else if (this.email == "") {
         return false;
-      } 
+      }
       return true;
     },
   },
@@ -213,9 +238,7 @@ button {
 .radio-group label {
   font-size: 14px;
   margin-right: 12vw;
-  padding-top: 1.5vw
+  padding-top: 1.5vw;
   /* padding-left: 2px;  */
 }
-
-
 </style>
