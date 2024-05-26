@@ -159,6 +159,44 @@ export default {
       }
       return true;
     },
+    generateSignature() {
+      // Create parameter string
+      const crypto = require("crypto");
+
+      let passPhrase = this.payfastPassPhrase;
+      let data = {
+        merchant_id: this.merchantId,
+        merchant_key: this.merchantKey,
+        return_url: this.baseUrl + this.successUrl,
+        cancel_url: this.baseUrl + this.cancelUrl,
+        amount: this.cartTotal,
+        item_name: "Sportvest Order",
+        // email_address: this.email,
+        // cell_number: this.cell,
+      };
+
+      let pfOutput = "";
+      for (let key in data) {
+        if (data.hasOwnProperty(key)) {
+          if (data[key] !== "") {
+            pfOutput += `${key}=${encodeURIComponent(data[key].trim()).replace(
+              /%20/g,
+              "+"
+            )}&`;
+          }
+        }
+      }
+
+      // Remove last ampersand
+      let getString = pfOutput.slice(0, -1);
+      if (passPhrase !== null) {
+        getString += `&passphrase=${encodeURIComponent(
+          passPhrase.trim()
+        ).replace(/%20/g, "+")}`;
+      }
+
+      return crypto.createHash("md5").update(getString).digest("hex");
+    },
   },
 };
 </script>
