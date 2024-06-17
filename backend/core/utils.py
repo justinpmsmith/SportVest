@@ -99,10 +99,13 @@ class Utils:
     def emailReceipt(pdf_receipt, info):
         subject = f"SportVest receipt {info['receipt_no']}"
         message = f"Dear {info['name']}, \n\nThank you for your purchase " \
-                  f"\n\nPlease confirm that the delivery information we have for this order is correct " \
+                  f"\n\nPlease confirm that the delivery information we have for this order is correct. If you have " \
+                  f"chosen to collect your order we will be in contact shortly to make arrangements. " \
                   f"\nLocation: {info['address']}" \
                   f"\nContact Cell: {info['cell']}" \
-                  f"\n\nIf you have any queries please contact Cherise at {settings.ADMIN_EMAIL}" \
+                  f"\n\nIf you have any queries please contact Cherise at " \
+                  f"\nEmail: {settings.ADMIN_EMAIL}" \
+                  f"\nCell: {settings.ADMIN_CELL}" \
                   f"\n\nThank you for your support"
 
         from_email = settings.EMAIL_HOST_USER

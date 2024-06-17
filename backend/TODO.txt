@@ -1,9 +1,2 @@
-* remove paxi as delivery option
-
-* integrate sportvest email
-
-* at shipping fee to cart
-
-* link pay fast to check out page
 
 * NB!!! go through settings.py file before deploying

@@ -8,4 +8,5 @@ export default {
   payfast: "https://sandbox.payfast.co.za​/eng/process",
   merchantId: "22867056",
   merchantKey: "igq1xekpafskt",
+  passPhrase: "Ch3ris3 has an aw3some son",
 };

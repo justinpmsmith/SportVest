@@ -9,7 +9,7 @@
         <NuxtLink to="/">
           <h2 class="text-white text-center mx-8"><u>Home</u></h2>
         </NuxtLink>
-        <NuxtLink to="/paymentSuccessful">
+        <NuxtLink to="/contactUs">
           <h2 class="text-white text-center mx-8"><u>Contact Us</u></h2>
         </NuxtLink>
       </div>

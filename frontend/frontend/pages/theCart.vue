@@ -11,7 +11,7 @@
     </h1>
 
     <div v-if="Object.keys(cartStore.cart).length">
-    <h6 class="text-white  text-center">Shipping fee(flat rate): R120</h6>
+    <!-- <h6 class="text-white  text-center">Shipping fee(flat rate): R120</h6> -->
 
       <div
         v-for="product in Object.values(cartStore.cart)"
