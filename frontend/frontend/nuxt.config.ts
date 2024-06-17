@@ -2,6 +2,9 @@
 import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
+//   app: {
+//     buildAssetsDir: "/BuildFolderWithoutUnderscore/",
+// },
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',

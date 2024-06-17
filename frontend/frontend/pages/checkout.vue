@@ -175,7 +175,7 @@ export default {
       merchantId: "",
       merchantKey: "",
       orderTotal: 0,
-      baseUrl: "https://370b-165-255-36-241.ngrok-free.app",
+      baseUrl: config.domain,
       successUrl: "/paymentSuccessful",
       cancelUrl: "/paymentCancelled",
       collection: null,
