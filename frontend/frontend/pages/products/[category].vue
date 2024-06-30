@@ -21,8 +21,7 @@
       }
     },
     created() {
-      const route = useRoute();
-      console.log("[cat] params: " + route.params.category)
+
     },
 
 }

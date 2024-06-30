@@ -65,7 +65,7 @@ export default {
   },
 
   created() {
-    console.log("Prod list cat: " + this.category)
+
     this.loadProducts(this.category);
   },
   computed: {
@@ -87,6 +87,7 @@ export default {
       axios
         .get(config.apiUrl + config.loadProductsExt, params) 
         .then((response) => {
+          console.log("products fetched from backend")
           console.log(response.data);
           this.products = response.data;
         })

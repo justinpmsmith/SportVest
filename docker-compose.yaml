@@ -1,9 +1,14 @@
 version: "3.8"
+networks:
+  sportvest-default:
+    name: sportvest-default
 services:
   backend:
     build: ./backend
     image: 'sportvest-backend:0.0.2'
     container_name: backend_c
+    networks:
+      - sportvest-default
     ports:
       - '8000:8000'
     volumes:
@@ -15,8 +20,11 @@ services:
     build: ./frontend/frontend
     image: 'sportvest-frontend:0.0.2'
     container_name: frontend_c
+    networks:
+      - sportvest-default
     ports:
       - '80:3000'
+      - '24678:24678'
     # volumes:
     #   - ./frontend/frontend: /frontend
     #   - ./frontend/node_modules

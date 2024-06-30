@@ -1,8 +1,19 @@
 export default {
-  // apiUrl: 'http://backend:8000',
-
-  apiUrl: `http://${process.env.DOCKER_HOSTNAME_INTERNAL}:8000`,
   // apiUrl: "http://127.0.0.1:8000",
+  // apiUrl: "http://backend:8000",
+  // apiUrl: `http://${process.env.DOCKER_HOSTNAME_INTERNAL}:8000`,
+  // apiUrl: "http://172.17.0.1:8000",
+  // apiUrl: "http://host.docker.internal:8000",
+  // apiUrl: "backend_c:8000",
+  apiUrl: "http://localhost:8000",
+  // apiUrl: "http://backend:8000",
+  // apiUrl: "backend:8000",
+
+
+
+
+
+
   sellSomethingExt: "/backend/submit-form/",
   loadProductsExt: "/backend/products",
   soldItemsExt: "/backend/sold-items/",

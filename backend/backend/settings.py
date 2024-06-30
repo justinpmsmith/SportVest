@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+
 # from dotenv import load_dotenv
 
 # don't forget to remove this line !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -48,16 +49,20 @@ MIDDLEWARE = [
 ]
 
 # add this block below MIDDLEWARE
-# CORS_ORIGIN_WHITELIST = (
-#     'http://localhost:3000',
-#     'http://host.docker.internal:3000'
-#
-# )
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:3000',
-#     'http://127.0.0.1:3000',
-#     'http://host.docker.internal:3000'
-# ]
+CORS_ORIGIN_WHITELIST = (
+
+    'http://localhost:3000',
+    'http://host.docker.internal:3000'
+
+)
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://localhost',
+
+    'http://127.0.0.1:3000',
+    'http://host.docker.internal:3000',
+    "http://frontend:3000",
+]
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -135,8 +140,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ['EMAIL_HOST_SERVER']
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-# EMAIL_PORT = 465
+EMAIL_PORT = 587 # tls
+# EMAIL_PORT = 465 # ssl
 EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 ADMIN_EMAIL = os.environ['ADMIN_EMAIL']
