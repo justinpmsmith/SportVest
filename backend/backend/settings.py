@@ -19,9 +19,6 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']  # '127.0.0.1', '.ngrok-free.app'
-CORS_ORIGIN_ALLOW_ALL = True
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -48,21 +45,24 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+ALLOWED_HOSTS = ['*']  # '127.0.0.1', '.ngrok-free.app'
+CORS_ORIGIN_ALLOW_ALL = True
+
 # add this block below MIDDLEWARE
-CORS_ORIGIN_WHITELIST = (
-
-    'http://localhost:3000',
-    'http://host.docker.internal:3000'
-
-)
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://localhost',
-
-    'http://127.0.0.1:3000',
-    'http://host.docker.internal:3000',
-    "http://frontend:3000",
-]
+# CORS_ORIGIN_WHITELIST = (
+#
+#     'http://localhost:3000',
+#     'http://host.docker.internal:3000'
+#
+# )
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000',
+#     'http://localhost',
+#
+#     'http://127.0.0.1:3000',
+#     'http://host.docker.internal:3000',
+#     "http://frontend:3000",
+# ]
 
 ROOT_URLCONF = 'backend.urls'
 

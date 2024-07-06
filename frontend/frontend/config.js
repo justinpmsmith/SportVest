@@ -5,9 +5,10 @@ export default {
   // apiUrl: "http://172.17.0.1:8000",
   // apiUrl: "http://host.docker.internal:8000",
   // apiUrl: "backend_c:8000",
-  apiUrl: "http://localhost:8000",
+  apiUrl: "http://localhost:8769",
   // apiUrl: "http://backend:8000",
   // apiUrl: "backend:8000",
+  // apiUrl: "http://41.76.111.40:8000",
 
 
 

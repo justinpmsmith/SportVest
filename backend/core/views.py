@@ -75,7 +75,7 @@ class SoldItems(APIView):
         info['receipt_no'] = timestamp
 
         if info:
-            # Utils.updateDb(info)
+            Utils.updateDb(info)
 
             # send digital receipt
             receipt_info = {
