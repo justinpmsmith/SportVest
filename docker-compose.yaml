@@ -10,7 +10,7 @@ services:
     networks:
       - sportvest-default
     ports:
-      - '8769:8000'
+      - '8769:8769'
     volumes:
       - ./backend:/backend
     env_file:
