@@ -1,10 +1,10 @@
 import os
 from pathlib import Path
 
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
 # don't forget to remove this line !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# load_dotenv()
+load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

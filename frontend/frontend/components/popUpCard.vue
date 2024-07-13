@@ -2,9 +2,25 @@
   <div class="popup-card">
     <div class="popup-wrapper">
       <v-card class="popup-content">
-        <v-img :src="product.image" class="popup-image"></v-img>
+        <!-- <v-img :src="product.image" class="popup-image"></v-img> -->
+        <v-carousel hide-delimiters>
+          <v-carousel-item :src="product.image" cover></v-carousel-item>
+
+          <v-carousel-item
+          :src="product.image2?product.image2:product.image"
+            cover
+          ></v-carousel-item>
+
+          <v-carousel-item
+          :src="product.image3?product.image3:product.image"
+            cover
+          ></v-carousel-item>
+        </v-carousel>
+
         <div class="popup-message">
-          <div class="text-h6 text-sm-left" style="color:wheat;">{{product.description}}</div>
+          <div class="text-h6 text-sm-left" style="color: wheat">
+            {{ product.description }}
+          </div>
           <!-- <ul class="popup-list">
               <li class="popup-item">
                 <p class="popup-text">{{ message1 }}</p>

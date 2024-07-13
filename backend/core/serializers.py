@@ -7,7 +7,7 @@ from .models import Product
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('id', 'name', "prodCode", 'category', "image", "price", "description")
+        fields = ('id', 'name', "prodCode", 'category', "image", "image2", "image3", "price", "description")
 
 
 # class FormSerializer(serializers.ModelSerializer):

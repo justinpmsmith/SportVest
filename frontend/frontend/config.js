@@ -21,5 +21,6 @@ export default {
   merchantId: "22867056",
   merchantKey: "igq1xekpafskt",
   passPhrase: "Ch3ris3 has an aw3some son",
-  domain: "https://www.sportvest-store.co.za"
+  domain: "https://www.sportvest-store.co.za",
+  text: "Welcome to our website, where we are dedicated to helping everyone stay active and involved in sport without breaking the bank. As a hockey coach and mom of sporty kids, I understand the struggle of constantly needing new sports equipment and shoes as kids quickly outgrow them. That's why I have combined my passion for sport with my desire to make them more accessible to all. Our mission is simple - to provide affordable and quality sports gear so that everyone can stay active and enjoy the benefits of physical activity. With our motto \"we keep you moving,\" we strive to keep you on the move and in the game, no matter your budget. Thank you for visiting our site, and we hope to help you find the perfect gear to keep you active and thriving in your favorite sports.",
 };
