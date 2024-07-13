@@ -8,7 +8,7 @@
           <label
             >Would you like to collect your order(Arrangments will be made for
             collection in White River Mpumalanga) or have it delivered through
-            Postnet?</label
+            Pudo(Powered by The Delivery Guy)?</label
           >
           <div class="radio-group">
             <label for="collection">Collection (free)</label>
@@ -20,7 +20,7 @@
               :value="true"
             />
 
-            <label for="delivery">Delivery (R120)</label>
+            <label for="delivery">Delivery ({{ shippingFee }})</label>
             <input
               type="radio"
               id="delivery"
@@ -54,7 +54,7 @@
           </div>
           <div class="form-group">
             <label for="cell">Cell:</label>
-            <input type="number" id="cell" v-model="cell" />
+            <input type="tel" id="cell" v-model="cell" />
           </div>
           <div class="form-group">
             <label for="email">Email Address:</label>
@@ -81,7 +81,7 @@
           </div>
           <div class="form-group">
             <label for="cell">Cell:</label>
-            <input type="number" id="cell" v-model="cell" />
+            <input type="tel" id="cell" v-model="cell" />
           </div>
           <div class="form-group">
             <label for="email">Email Address:</label>
@@ -180,6 +180,7 @@ export default {
       cancelUrl: "/paymentCancelled",
       collection: null,
       signature: "",
+      shippingFee: 60,
     };
   },
   created() {
@@ -204,7 +205,7 @@ export default {
       }
 
       if (!this.collection) {
-        this.cartStore.setShippingFee(120);
+        this.cartStore.setShippingFee(this.shippingFee);
       } else {
         this.cartStore.setShippingFee(0);
       }

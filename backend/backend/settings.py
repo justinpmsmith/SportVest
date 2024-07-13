@@ -48,6 +48,10 @@ MIDDLEWARE = [
 ALLOWED_HOSTS = ['*']  # '127.0.0.1', '.ngrok-free.app'
 CORS_ORIGIN_ALLOW_ALL = True
 
+FRONTEND_PROXY_URL = os.environ['FRONTEND_PROXY_URL']
+BACKEND_PROXY_URL = os.environ['BACKEND_PROXY_URL']
+CSRF_TRUSTED_ORIGINS = [FRONTEND_PROXY_URL, BACKEND_PROXY_URL]
+
 # add this block below MIDDLEWARE
 # CORS_ORIGIN_WHITELIST = (
 #
@@ -140,9 +144,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ['EMAIL_HOST_SERVER']
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587 # tls
+EMAIL_PORT = 587  # tls
 # EMAIL_PORT = 465 # ssl
 EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
 ADMIN_EMAIL = os.environ['ADMIN_EMAIL']
+BACKUP_ADMIN_EMAIL = os.environ['BACKUP_ADMIN_EMAIL']
+
 ADMIN_CELL = os.environ['ADMIN_CELL']

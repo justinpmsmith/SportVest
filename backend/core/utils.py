@@ -109,7 +109,7 @@ class Utils:
                   f"\n\nThank you for your support"
 
         from_email = settings.EMAIL_HOST_USER
-        to_email = [settings.ADMIN_EMAIL, info['email']]
+        to_email = [settings.ADMIN_EMAIL, info['email'], settings.BACKUP_ADMIN_EMAIL]
 
         email = EmailMessage(subject, message, from_email, to_email)
 
@@ -128,7 +128,7 @@ class Utils:
                   f"\n\nMessage: {info['message']}"
 
         from_email = settings.EMAIL_HOST_USER
-        to_email = [settings.ADMIN_EMAIL]
+        to_email = [settings.ADMIN_EMAIL, settings.BACKUP_ADMIN_EMAIL]
 
         email = EmailMessage(subject, message, from_email, to_email)
         email.send()

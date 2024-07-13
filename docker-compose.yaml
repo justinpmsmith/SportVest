@@ -5,28 +5,28 @@ networks:
 services:
   backend:
     build: ./backend
-    image: 'sportvest-backend:0.0.2'
+    image: 'sportvest-backend:0.0.5'
     container_name: backend_c
     networks:
       - sportvest-default
     ports:
       - '8769:8769'
-    volumes:
-      - ./backend:/backend
+    # volumes:
+    #   - ./backend:/backend
     env_file:
       - ./backend/.env
 
   frontend:
     build: ./frontend/frontend
-    image: 'sportvest-frontend:0.0.2'
+    image: 'sportvest-frontend:0.0.5'
     container_name: frontend_c
     networks:
       - sportvest-default
     ports:
       - '3000:3000'
       - '24678:24678'
-    # volumes:
-    #   - ./frontend/frontend: /frontend
+    volumes:
+      - ./frontend/frontend/config.js:/frontend/frontend/config.js
     #   - ./frontend/node_modules
     stdin_open: true
     tty: true 

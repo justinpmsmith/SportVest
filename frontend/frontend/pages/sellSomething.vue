@@ -1,8 +1,11 @@
 <template>
   <div>
   <theHeader :inCart="false" :inSellSomething="true"> </theHeader>
-
+    
+    <h1 class="text-white text-4xl text-center my-8">Sell Something</h1>
+    
   <div class="form-wrapper">
+
     <form @submit.prevent="submitForm" class="form-content">
       <div class="form-group">
         <label for="description">Description:</label>
@@ -14,7 +17,7 @@
       </div>
       <div class="form-group">
         <label for="cell">Cell Number:</label>
-        <input type="number" id="cell" v-model="cell" />
+        <input type="tel" id="cell" v-model="cell" />
       </div>
       <div class="form-group">
         <label for="email">Email Address:</label>

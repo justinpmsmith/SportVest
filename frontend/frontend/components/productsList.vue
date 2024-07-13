@@ -65,7 +65,7 @@ export default {
   },
 
   created() {
-
+    // console.log("apiUrl: " + config.apiUrl);
     this.loadProducts(this.category);
   },
   computed: {
@@ -87,8 +87,8 @@ export default {
       axios
         .get(config.apiUrl + config.loadProductsExt, params) 
         .then((response) => {
-          console.log("products fetched from backend")
-          console.log(response.data);
+          // console.log("products fetched from backend")
+          // console.log(response.data);
           this.products = response.data;
         })
         .catch((error) => {
