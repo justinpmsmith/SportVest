@@ -6,66 +6,17 @@
       <h1 class="text-7xl text-white">SPORTVEST</h1>
     </div>
 
-    <div class="catagories">
-      <NuxtLink
-        to="/products/Cricket"
-        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
-        >Cricket</NuxtLink
+    <div class="categories">
+      <NuxtLink v-for="category in categories" :key="category.id"
+        :to="category.link"
+        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md button"
+        >{{ category.name }}</NuxtLink
       >
-      <NuxtLink
-        to="/products/Rugby"
-        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
-        >Rugby</NuxtLink
-      >
-      <NuxtLink
-        to="/products/Hockey"
-        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
-        >Hockey</NuxtLink
-      >
-      <NuxtLink
-        to="/products/Golf"
-        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
-        >Golf</NuxtLink
-      >
-      <NuxtLink
-        to="/products/shoes"
-        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
-        >Shoes</NuxtLink
-      >
-      <NuxtLink
-        to="/products/Athletics"
-        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
-        >Athletics</NuxtLink
-      >
-      <NuxtLink
-        to="/products/Tennis"
-        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
-        >Tennis</NuxtLink
-      >
-      <NuxtLink
-        to="/products/other"
-        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
-        >Other</NuxtLink
-      >
-      <NuxtLink
-        to="/products/all"
-        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
-        >All</NuxtLink
-      >
-      <NuxtLink
-        to="/products/Horse_Riding"
-        class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md catagoryButton"
-        >Horse Riding</NuxtLink
-      >
-
-      <br />
-      <br />
-      <br />
     </div>
   </div>
 </template>
+
 <script>
-// import axios from 'axios';
 import bgImg from "../assets/static/home_bg.jpeg";
 import { useCartStore } from "~/store/cart";
 import theHeader from "~/components/theHeader.vue";
@@ -78,11 +29,22 @@ export default {
     return {
       bg_img: bgImg,
       cartStore: useCartStore(),
+      categories: [
+        { id: 1, name: "All", link: "/products/all" },
+        { id: 2, name: "Cricket", link: "/products/Cricket" },
+        { id: 3, name: "Hockey", link: "/products/Hockey" },
+        { id: 4, name: "Golf", link: "/products/Golf" },
+        { id: 5, name: "Shoes", link: "/products/shoes" },
+        { id: 6, name: "Athletics", link: "/products/Athletics" },
+        { id: 7, name: "Court", link: "/products/Tennis" }, // Assuming "Court" refers to Tennis
+        { id: 8, name: "Other", link: "/products/Other" },
+        { id: 9, name: "Horse Riding", link: "/products/Horse_Riding" }, // Assuming "Equin" refers to Horse Riding
+        { id: 10, name: "Rugby/Soccer", link: "/products/Rugby" },
+      ],
     };
   },
 };
 </script>
-
 
 <style scoped>
 .text-center {
@@ -90,16 +52,23 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
 }
+
 .categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the links horizontally */
   padding-top: 3rem;
   padding-bottom: 4rem;
-}
-.catagoryButton {
-  margin: 0.8rem;
-  width: 25%;
+  max-width: 40rem;
+  margin: 0 auto; /* Center the container itself */
 }
 
-/* Add a media query for smaller screens */
+.button {
+  color: white; /* Adjust text color for contrast */
+  margin: 0.8rem;
+  width: 10rem;
+}
+
 @media (max-width: 768px) {
   .text-md {
     font-size: 15px; /* Adjust the font size as needed */

@@ -12,6 +12,9 @@
         <NuxtLink to="/contactUs">
           <h2 class="text-white text-center mx-8"><u>Contact Us</u></h2>
         </NuxtLink>
+        <NuxtLink to="/about">
+          <h2 class="text-white text-center mx-8"><u>About Us</u></h2>
+        </NuxtLink>
       </div>
       <img src="../assets/static/slogan.jpeg" class="footer-image" />
     </footer>

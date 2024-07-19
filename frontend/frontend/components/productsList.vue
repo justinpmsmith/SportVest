@@ -1,7 +1,9 @@
 <template>
   <div>
     <theHeader :inCart="false" :inSellSomething="false"> </theHeader>
-    <h2 class="text-white text-4xl text-center my-8">{{ formattedCategory }}</h2>
+    <h2 class="text-white text-4xl text-center my-8">
+      {{ formattedCategory }}
+    </h2>
     <div v-if="products.length == 0">
       <h2 class="text-white text-2xl text-center my-8">
         No products for this category
@@ -25,9 +27,8 @@
         class="flex-shrink-0 card"
         @click="openPopup(product)"
       >
-        <v-img :src="product.image" class="prodImage"></v-img>
+        <v-img :src="product.image" class="prodImage" contain></v-img>
       </v-card>
-
     </div>
 
     <PopUpCard
@@ -35,12 +36,11 @@
       :product="selectedProduct"
       @close-popup="closePopUp"
     ></PopUpCard>
-    <br>
-      <br>
-      <br>
+    <br />
+    <br />
+    <br />
   </div>
 </template>
-
 
 <script>
 import axios from "axios";
@@ -65,19 +65,21 @@ export default {
   },
 
   created() {
-    // console.log("apiUrl: " + config.apiUrl);
     this.loadProducts(this.category);
   },
   computed: {
     formattedCategory() {
-      // Check if 'category' contains underscores
       if (this.category.includes("_")) {
-        // Replace underscores with spaces
         return this.category.replace(/_/g, " ");
-      } else {
-        // If no underscores, return 'category' as is
-        return this.category;
       }
+      if (this.category == "Tennis") {
+        return "Court";
+      }
+      if (this.category == "Rugby") {
+        return "Rugby/Soccer";
+      }
+
+      return this.category;
     },
   },
   methods: {
@@ -85,10 +87,8 @@ export default {
       const params = { params: { category: category } };
 
       axios
-        .get(config.apiUrl + config.loadProductsExt, params) 
+        .get(config.apiUrl + config.loadProductsExt, params)
         .then((response) => {
-          // console.log("products fetched from backend")
-          // console.log(response.data);
           this.products = response.data;
         })
         .catch((error) => {
@@ -108,8 +108,21 @@ export default {
 
 <style scoped>
 .prodImage {
-  width: 10rem;
-  padding: 2%;
+  /* width: 100%; */
+  height: 100%;
+  object-fit: fill;
+  padding: 0.5%;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 9rem;
+  /* height: 9rem; */
+  max-height: 13rem;
+  margin: 0.5rem;
+  background-color: #8cacaf;
 }
 
 .flex-wrap {
@@ -118,15 +131,5 @@ export default {
 
 .flex-shrink-0 {
   flex-shrink: 0;
-}
-.card {
-  margin: 0.5rem;
-}
-.category-heading {
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: white;
 }
 </style>

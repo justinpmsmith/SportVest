@@ -20,6 +20,7 @@
   
   <script>
   import theHeader from "~/components/theHeader.vue";
+  import config from "~/config";
 
   
   export default {
@@ -28,9 +29,8 @@
     },
     data() {
       return {
-        aboutText:
-          'Welcome to our website, where we are dedicated to helping everyone stay active and involved in sports without breaking the bank. As a hockey coach and mom of sporty kids, I understand the struggle of constantly needing new sports equipment and shoes as kids quickly outgrow them. That\'s why I have combined my passion for sports with my desire to make them more accessible to all. Our mission is simple - to provide affordable and quality sports gear so that everyone can stay active and enjoy the benefits of physical activity. With our motto "we keep you moving," we strive to keep you on the move and in the game, no matter your budget. Thank you for visiting our site, and we hope to help you find the perfect gear to keep you active and thriving in your favorite sports.',
-      };
+        aboutText:config.aboutText
+};
     },
     computed: {},
     methods: {},
