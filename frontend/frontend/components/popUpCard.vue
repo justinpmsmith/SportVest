@@ -21,6 +21,10 @@
           <div class="text-h6 text-sm-left" style="color: wheat">
             {{ product.description }}
           </div>
+          <br>
+          <div class="text-h6 text-sm-left" style="color: wheat">
+            Price: R{{ product.price }}
+          </div>
           <!-- <ul class="popup-list">
               <li class="popup-item">
                 <p class="popup-text">{{ message1 }}</p>

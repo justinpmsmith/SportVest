@@ -7,16 +7,16 @@
     <footer class="bg-teal-700">
       <div class="row">
         <NuxtLink to="/">
-          <h2 class="text-white text-center mx-8"><u>Home</u></h2>
+          <h2 class="text-white text-center mx-8"><b><u>Home</u></b></h2>
         </NuxtLink>
         <NuxtLink to="/contactUs">
-          <h2 class="text-white text-center mx-8"><u>Contact Us</u></h2>
+          <h2 class="text-white text-center mx-8"><b><u>Contact Us</u></b></h2>
         </NuxtLink>
-        <NuxtLink to="/about">
-          <h2 class="text-white text-center mx-8"><u>About Us</u></h2>
+        <NuxtLink to="/paymentSuccessful">
+          <h2 class="text-white text-center mx-8"><b><u>About Us</u></b></h2>
         </NuxtLink>
       </div>
-      <img src="../assets/static/slogan.jpeg" class="footer-image" />
+      <img src="../assets/static/slogan1.jpeg" class="footer-image" />
     </footer>
   </div>
 </template>

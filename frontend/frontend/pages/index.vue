@@ -7,10 +7,10 @@
     </div>
 
     <div class="categories">
-      <NuxtLink v-for="category in categories" :key="category.id"
+      <v-btn v-for="category in categories" :key="category.id" size="medium" elevation="8"
         :to="category.link"
         class="inline-block py-3 px-8 bg-teal-900 text-white rounded-md button"
-        >{{ category.name }}</NuxtLink
+        >{{ category.name }}</v-btn
       >
     </div>
   </div>
@@ -37,9 +37,14 @@ export default {
         { id: 5, name: "Shoes", link: "/products/shoes" },
         { id: 6, name: "Athletics", link: "/products/Athletics" },
         { id: 7, name: "Court", link: "/products/Tennis" }, // Assuming "Court" refers to Tennis
-        { id: 8, name: "Other", link: "/products/Other" },
-        { id: 9, name: "Horse Riding", link: "/products/Horse_Riding" }, // Assuming "Equin" refers to Horse Riding
-        { id: 10, name: "Rugby/Soccer", link: "/products/Rugby" },
+        { id: 8, name: "Horse Riding", link: "/products/Horse_Riding" }, // Assuming "Equin" refers to Horse Riding
+        { id: 9, name: "Rugby/Soccer", link: "/products/Rugby" },
+        { id: 10, name: "Cycling", link: "/products/Cycling" },
+        { id: 11, name: "Trainers", link: "/products/Trainers" },
+        { id: 12, name: "Other", link: "/products/Other" },
+
+
+
       ],
     };
   },
@@ -64,8 +69,10 @@ export default {
 }
 
 .button {
-  color: white; /* Adjust text color for contrast */
-  margin: 0.8rem;
+  color: rgb(230, 226, 226); /* Adjust text color for contrast */
+  background-color: rgb(19, 82, 82);
+  margin: 0.3rem;
+  margin-bottom: 0.8rem;
   width: 10rem;
 }
 

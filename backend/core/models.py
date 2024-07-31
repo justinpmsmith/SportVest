@@ -13,7 +13,9 @@ class Product(models.Model):
         ('Golf', 'Golf'),
         ('Tennis', 'Tennis'),
         ('Horse_Riding', 'Horse_Riding'),
-        ('Other', 'Other')
+        ('Other', 'Other'),
+        ('Cycling', 'Cycling'),
+        ('Trainers', 'Trainers'),
 
     )
 

@@ -4,10 +4,26 @@
     <h2 class="text-white text-4xl text-center my-8">
       {{ formattedCategory }}
     </h2>
+    <div class="text-center"></div>
     <div v-if="products.length == 0">
-      <h2 class="text-white text-2xl text-center my-8">
-        No products for this category
-      </h2>
+
+      <div v-if="loadingProducts" class="text-center">
+        <v-progress-circular
+          color="green"
+          indeterminate
+          class="text-center"
+        ></v-progress-circular>
+        <h2 class="text-white text-2xl text-center my-8">
+          Loading products...
+        </h2>
+      </div>
+      <div v-else>
+        <h2 class="text-white text-2xl text-center my-8">
+          No products for this category
+        </h2>
+      </div>
+
+
       <br />
       <br />
       <br />
@@ -61,11 +77,18 @@ export default {
       products: [],
       cartStore: useCartStore(),
       selectedProduct: null,
+      loadingProducts: false,
     };
   },
 
-  created() {
-    this.loadProducts(this.category);
+  async created() {
+    console.log("setting loading to true")
+    this.loadingProducts = true;
+    await this.loadProducts(this.category);
+    console.log("setting loading to false")
+
+    this.loadingProducts = false;
+
   },
   computed: {
     formattedCategory() {
@@ -83,17 +106,29 @@ export default {
     },
   },
   methods: {
-    loadProducts(category) {
+    async loadProducts(category) {
       const params = { params: { category: category } };
 
-      axios
-        .get(config.apiUrl + config.loadProductsExt, params)
-        .then((response) => {
+      // await axios
+      //   .get(config.apiUrl + config.loadProductsExt, params)
+      //   .then((response) => {
+      //     this.products = response.data;
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //     this.loadingProducts = false;
+      //   });
+
+
+
+        try{
+          var response = await axios.get(config.apiUrl + config.loadProductsExt, params)
           this.products = response.data;
-        })
-        .catch((error) => {
+        }
+        catch(error){
           console.log(error);
-        });
+          this.loadingProducts = false;
+        }
     },
 
     openPopup(product) {
@@ -118,9 +153,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 9rem;
+  width: 8rem;
   /* height: 9rem; */
-  max-height: 13rem;
+  max-height: 11rem;
   margin: 0.5rem;
   background-color: #8cacaf;
 }

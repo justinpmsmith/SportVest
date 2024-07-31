@@ -8,9 +8,11 @@
           <label
             >Would you like to collect your order(Arrangments will be made for
             collection in White River Mpumalanga) or have it delivered through
-            Pudo(Powered by The Delivery Guy)?</label
+            PUDO(Powered by The Delivery Guy)?</label
           >
           <div class="radio-group">
+            <ul>
+              <li>
             <label for="collection">Collection (free)</label>
             <input
               type="radio"
@@ -19,6 +21,8 @@
               v-model="this.collection"
               :value="true"
             />
+          </li>
+          <li>
 
             <label for="delivery">Delivery ({{ shippingFee }})</label>
             <input
@@ -28,6 +32,9 @@
               v-model="this.collection"
               :value="false"
             />
+          </li>
+        </ul>
+
           </div>
           <button class="submit-button" type="submit">Next</button>
         </form>
@@ -45,7 +52,7 @@
             <input type="text" id="name" v-model="name" />
           </div>
           <div class="form-group">
-            <label for="address">Address of Postnet nearest to you:</label>
+            <label for="address">Address of PUDO nearest to you:</label>
             <input type="text" id="address" v-model="address" />
           </div>
           <div class="form-group">
@@ -390,24 +397,25 @@ button {
 }
 .radio-group {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .radio-group input {
-  margin-right: 2vw;
-  transform: scale(0.8); /* Adjust the scale factor to make them smaller */
+  /* margin-right: 2vw; */
+  /* transform: scale(0.8); Adjust the scale factor to make them smaller */
 }
 
 /* Optional: Adjust the label size and padding if needed */
 .radio-group label {
-  font-size: 14px;
-  margin-right: 12vw;
-  padding-top: 1.5vw;
+  font-size: 1rem;
+  /* margin-right: 12vw; */
+  padding-top: 2rem;
   /* padding-left: 2px;  */
 }
 .button-group {
   display: flex;
-  justify-content: space-between; /* Or 'flex-end' for right alignment */
+  justify-content: center;
+
 }
 .radio-group {
   display: flex; /* Make radio buttons and labels behave as flex items */
@@ -415,6 +423,6 @@ button {
 }
 
 .radio-group label {
-  margin-right: 10px; /* Optional spacing between label and radio button */
+  /* margin-right: 3rem; Optional spacing between label and radio button */
 }
 </style>

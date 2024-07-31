@@ -52,6 +52,7 @@ export default {
       console.log(JSON.stringify(buyerInfo));
       this.cartStore.clearCart();
       let endpoint = config.apiUrl + config.soldItemsExt;
+
       try {
         let response = await axios.post(endpoint, buyerInfo, {
           headers: {
