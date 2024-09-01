@@ -1,3 +1,7 @@
 
 backend/.env
 .docker_temp_301472915
+backend/backend/__pycache__/settings.cpython-311.pyc
+/backend/staticfiles
+/backend/backend/__pycache__
+*.pyc

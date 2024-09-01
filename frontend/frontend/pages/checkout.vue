@@ -111,6 +111,9 @@
         <form class="form-content">
           <label class="text-center text-2xl">Total</label>
           <label class="text-center">R{{ orderTotal }}</label>
+          <label class="text-md-center"
+            >Thank you for your support. Please note due to the nature of the business, all items are non-refundable.</label
+          >
 
           <div class="row">
             <button class="submit-button" @click="previous">Previous</button>

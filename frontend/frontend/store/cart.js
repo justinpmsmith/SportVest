@@ -58,5 +58,10 @@ export const useCartStore = defineStore("cart", {
     setShippingFee(fee) {
       this.shippingFee = fee;
     },
+    clearAll(){
+      this.clearCart();
+      this.buyerInfo = {};
+      this.shippingFee = 0;
+    }
   },
 });

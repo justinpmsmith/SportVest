@@ -36,29 +36,29 @@ export default {
     };
   },
   async created() {
-    console.log("created")
     await this.submitPurchase();
+    // setTimeout(() => {this.$router.push("/");}, 20000)
   },
   methods: {
     async submitPurchase() {
-      let buyerInfo = this.cartStore.getbuyerInfo;
-
-      // add shipping fee 
-      buyerInfo['shipping_fee'] = this.cartStore.getShippingFee;
-  
-
-
-      console.log("buyer info: ")
-      console.log(JSON.stringify(buyerInfo));
-      this.cartStore.clearCart();
-      let endpoint = config.apiUrl + config.soldItemsExt;
-
       try {
+        let buyerInfo = this.cartStore.getbuyerInfo;
+
+        if (Object.keys(buyerInfo) == 0){return}
+
+        // add shipping fee
+        buyerInfo["shipping_fee"] = this.cartStore.getShippingFee;
+
+        // this.cartStore.clearCart();
+        let endpoint = config.apiUrl + config.soldItemsExt;
         let response = await axios.post(endpoint, buyerInfo, {
           headers: {
             "Content-Type": "application/json",
           },
         });
+
+        this.cartStore.clearAll();
+
         console.log(response);
       } catch (error) {
         console.log(error);

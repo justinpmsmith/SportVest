@@ -5,7 +5,7 @@ networks:
 services:
   backend:
     build: ./backend
-    image: 'sportvest-backend:0.0.6'
+    image: 'sportvest-backend:0.0.7'
     container_name: backend_c
     networks:
       - sportvest-default
@@ -18,7 +18,7 @@ services:
 
   frontend:
     build: ./frontend/frontend
-    image: 'sportvest-frontend:0.0.13'
+    image: 'sportvest-frontend:0.0.15'
     container_name: frontend_c
     networks:
       - sportvest-default

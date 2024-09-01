@@ -11,6 +11,8 @@ from .models import Product, Sold, Receipt
 from datetime import datetime
 from .utils import Utils
 
+from django.db.models import Count
+
 
 class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
@@ -75,8 +77,6 @@ class SoldItems(APIView):
         info['receipt_no'] = timestamp
 
         if info:
-            Utils.updateDb(info)
-
             # send digital receipt
             receipt_info = {
                 'receipt_no': timestamp,
@@ -90,6 +90,8 @@ class SoldItems(APIView):
             Utils.emailReceipt(pdf_receipt, info)
             print("email sent")
 
+            # Utils.updateDb(info)
+
         return Response({'message': 'success'})
 
 
@@ -101,4 +103,13 @@ class ContactUS(APIView):
         info = request.data  # or request.json(), depending on your setup
         print(info)
         Utils.emailContactUsMessage(info)
+
+        # # Find duplicate prodcodes
+        # duplicates = Product.objects.values('prodCode').annotate(prodcode_count=Count('prodCode')).filter(
+        #     prodcode_count__gt=1)
+        #
+        # # Output duplicate prodcodes
+        # for duplicate in duplicates:
+        #     print(f"Duplicate prodCode: {duplicate['prodCode']} Count: {duplicate['prodcode_count']}")
+
         return Response({'message': 'success'})
