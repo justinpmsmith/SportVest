@@ -12,6 +12,7 @@
 
     <div v-if="Object.keys(cartStore.cart).length">
     <!-- <h6 class="text-white  text-center">Shipping fee(flat rate): R120</h6> -->
+    <p class="text-white text-center">Cart will clear after 10 minutes of inactivity</p>
 
       <div
         v-for="product in Object.values(cartStore.cart)"

@@ -52,6 +52,10 @@
             <input type="text" id="name" v-model="name" />
           </div>
           <div class="form-group">
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" v-model="surname" />
+          </div>
+          <div class="form-group">
             <label for="address">Address of PUDO nearest to you:</label>
             <input type="text" id="address" v-model="address" />
           </div>
@@ -85,6 +89,10 @@
           <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" id="name" v-model="name" />
+          </div>
+          <div class="form-group">
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" v-model="surname" />
           </div>
           <div class="form-group">
             <label for="cell">Cell:</label>
@@ -178,6 +186,7 @@ export default {
       cartStore: useCartStore(),
       formStep: 0,
       name: "",
+      surname: "", 
       address: "",
       postal: "",
       cell: "",
@@ -190,7 +199,7 @@ export default {
       cancelUrl: "/paymentCancelled",
       collection: null,
       signature: "",
-      shippingFee: 60,
+      shippingFee: 70,
     };
   },
   created() {
@@ -227,6 +236,8 @@ export default {
       if (this.validateDeliveryForm()) {
         let total = this.cartStore.getOrderTotal;
 
+        this.name = this.name + " " + this.surname;
+
         let info = {
           name: this.name,
           address: this.address,
@@ -235,6 +246,7 @@ export default {
           email: this.email,
           totalPrice: total,
         };
+
         this.cartStore.addBuyerInfo(info);
         this.formStep = 2;
         this.generateSignatureFromData();
@@ -246,6 +258,8 @@ export default {
       if (this.validateCollectionForm()) {
         let total = this.cartStore.getOrderTotal;
 
+        this.name = this.name + " " + this.surname;
+
         let info = {
           name: this.name,
           address: "NA",
@@ -254,6 +268,9 @@ export default {
           email: this.email,
           totalPrice: total,
         };
+
+        console.log("buyer info: ")
+        console.log(info);
         this.cartStore.addBuyerInfo(info);
         this.formStep = 2;
         this.generateSignatureFromData();
@@ -280,7 +297,7 @@ export default {
       return true;
     },
     validateCollectionForm() {
-      if (this.name == "") {
+      if (this.name == "" || this.surname == "") {
         return false;
       } else if (this.cell == "") {
         return false;

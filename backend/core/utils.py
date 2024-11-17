@@ -99,8 +99,8 @@ class Utils:
     def emailReceipt(pdf_receipt, info):
         subject = f"SportVest receipt {info['receipt_no']}"
         message = f"Dear {info['name']}, \n\nThank you for your purchase " \
-                  f"\n\nPlease confirm that the delivery information we have for this order is correct. If you have " \
-                  f"chosen to collect your order we will be in contact shortly to make arrangements. " \
+                  f"\n\nIf you have chosen to collect your order we will be in contact shortly to make arrangements; " \
+                  f"Otherwise you can expect your order 2-5 working days at the pudo locker you provided." \
                   f"\nLocation: {info['address']}" \
                   f"\nContact Cell: {info['cell']}" \
                   f"\n\nIf you have any queries please contact Cherise at " \

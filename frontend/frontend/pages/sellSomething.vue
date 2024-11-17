@@ -177,6 +177,7 @@ export default {
           alert(
             "Please fill in all the fields and upload at least 1 picture of the product"
           );
+          return;
         }
       } catch (error) {
         console.error(error);

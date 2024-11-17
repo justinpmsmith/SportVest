@@ -18,7 +18,7 @@ services:
 
   frontend:
     build: ./frontend/frontend
-    image: 'sportvest-frontend:0.0.15'
+    image: 'sportvest-frontend:0.0.17'
     container_name: frontend_c
     networks:
       - sportvest-default

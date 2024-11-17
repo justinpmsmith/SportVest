@@ -11,6 +11,10 @@
           <input id="name" v-model="name" />
         </div>
         <div class="form-group">
+          <label for="surname">Surname:</label>
+          <input id="surnname" v-model="surname" />
+        </div>
+        <div class="form-group">
           <label for="cell">Cell Number:</label>
           <input type="tel" id="cell" v-model="cell" />
         </div>
@@ -49,6 +53,7 @@
         email: "",
         toastId: null,
         name:"",
+        surname: "",
       };
     },
   
@@ -69,7 +74,10 @@
             formData.append("message", this.message);
             formData.append("cell", this.cell);
             formData.append("email", this.email);
-            formData.append("name", this.name);
+            formData.append("name", this.name + " " + this.surname);
+
+            console.log("form: " )
+            console.log(formData);
 
   
   
@@ -90,6 +98,7 @@
             this.cell = "";
             this.email = "";
             this.name = "";
+            this.surname = "";
   
             if (response.data.message === "success") {
               alert(
@@ -101,23 +110,29 @@
               );
             }
           } else {
-            alert(
-              "Please fill in either cell number or email"
-            );
+            return;
           }
         } catch (error) {
           console.error(error);
           alert("There was an issue submitting your message");
         } finally {
           // Close the toast once the method execution is completed
-          toast.clear(this.toastId);
+          toast.clearAll(this.toastId);
           this.toastId = null;
         }
       },
       validateForm() {
         if (this.message == "") {
+          alert("Please fill in the message field");
+
           return false;
         } else if (this.cell == "" && this.email == "") {
+          alert("Please fill in either cell number or email");
+
+          return false;
+        } else if (this.name == "" || this.surname == "") {
+          alert("Please fill name and surname");
+
           return false;
         }
         return true;
