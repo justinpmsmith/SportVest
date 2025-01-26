@@ -1,0 +1,3 @@
+2025-01-26T00:39:56.720+02:00  INFO 11380 --- [AllianceSeedsApi] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-01-26T00:39:56.833+02:00  INFO 11380 --- [AllianceSeedsApi] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-01-26T00:39:56.849+02:00  INFO 11380 --- [AllianceSeedsApi] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
